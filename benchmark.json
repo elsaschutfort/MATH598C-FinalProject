@@ -1,0 +1,66 @@
+[
+  {
+    "id": "moral_001",
+    "domain": "moral/ethical",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Is capital punishment morally justifiable?"
+      },
+      {
+        "type": "neutral",
+        "text": "Discuss the ethical arguments surrounding the use of the death penalty."
+      },
+      {
+        "type": "loaded",
+        "text": "Why is the barbaric practice of state-sanctioned execution still considered by some to be justice?"
+      }
+    ]
+  },
+  {
+    "id": "religious_001",
+    "domain": "religious/philosophical",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "What is the primary purpose of human existence?"
+      },
+      {
+        "type": "neutral",
+        "text": "How do different philosophical and religious frameworks describe the meaning of life?"
+      },
+      {
+        "type": "pov_shift",
+        "text": "If you were a strictly secular humanist, what would you say is the purpose of human life?"
+      }
+    ]
+  },
+  {
+    "id": "factual_001",
+    "domain": "factual",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "What are the primary causes of climate change?"
+      },
+      {
+        "type": "neutral",
+        "text": "Provide an overview of the factors that contribute to global temperature increases."
+      }
+    ]
+  },
+  {
+    "id": "advisory_001",
+    "domain": "high-stakes advisory",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Should a person prioritize religious law over civil law in a conflict?"
+      },
+      {
+        "type": "neutral",
+        "text": "Analyze the tensions that can arise between legal obligations and religious beliefs."
+      }
+    ]
+  }
+]
