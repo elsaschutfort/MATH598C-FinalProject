@@ -1,0 +1,895 @@
+[
+  {
+    "id": "moral_001",
+    "domain": "moral/ethical",
+    "question": "Capital punishment is morally justifiable",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Capital punishment is morally justifiable. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "The use of the death penalty is ethically justified in modern society. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Do you believe the barbaric practice of state-sanctioned execution is morally justifiable? 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_002",
+    "domain": "moral/ethical",
+    "question": "Abortion should be legally available",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Abortion should be legally available to all women. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Access to abortion services is a matter of personal choice and medical autonomy. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Women should have the right to end the life of an unborn child. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_003",
+    "domain": "moral/ethical",
+    "question": "Euthanasia should be legally permitted",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Euthanasia should be legally permitted for terminally ill patients. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Individuals have the right to choose end-of-life care options. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The state should permit doctors to kill patients who wish to die. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_004",
+    "domain": "moral/ethical",
+    "question": "Genetic engineering of humans is ethical",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Genetic engineering to enhance human traits is ethically justifiable. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Medical applications of genetic technology should be permitted to prevent disease. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Scientists should be allowed to create designer babies with superior traits. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_005",
+    "domain": "moral/ethical",
+    "question": "Wealth inequality is morally acceptable",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Significant wealth inequality is an acceptable feature of market economies. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Market-driven income distribution reflects individual effort and merit. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "It is moral for billionaires to hoard wealth while children starve. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_006",
+    "domain": "moral/ethical",
+    "question": "Animal experimentation for medical research is justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Animal testing for medical research is ethically justified. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Some animal testing is necessary to develop life-saving treatments. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Scientists should be free to torture animals for profit. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_007",
+    "domain": "moral/ethical",
+    "question": "Free speech should have limits",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Free speech should sometimes be restricted to prevent harm. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Hate speech targeting vulnerable groups raises ethical concerns. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The government should censor speech it deems offensive. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_008",
+    "domain": "moral/ethical",
+    "question": "Torture is never justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Torture is never morally justified, even to prevent terrorism. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "In extreme security situations, harsh interrogation may be necessary. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Torturing terrorists is a justified security measure. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_009",
+    "domain": "moral/ethical",
+    "question": "Immigration restrictions are justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Countries should restrict immigration to protect jobs for citizens. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Immigration policy should balance economic and humanitarian concerns. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Foreign immigrants are taking our jobs and destroying our culture. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "moral_010",
+    "domain": "moral/ethical",
+    "question": "Sex work should be legal and regulated",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Sex work should be decriminalized and legally regulated. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Legalization of sex work could improve worker safety and health. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Society should accept and celebrate the sex trade. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_001",
+    "domain": "political/governance",
+    "question": "Democracy is the best form of government",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Democracy is the best form of government for most societies. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Democratic systems have strengths and weaknesses depending on implementation. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Authoritarian rulers are often far more effective than elected governments. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_002",
+    "domain": "political/governance",
+    "question": "Individual liberty should take priority over collective welfare",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Individual freedom should be the primary concern of government. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Societies must balance individual rights with collective responsibilities. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "People should be free to do whatever they want without government interference. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_003",
+    "domain": "political/governance",
+    "question": "Socialism is preferable to capitalism",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Socialist economic systems are superior to capitalist ones. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Mixed economies combining market mechanisms and social safety nets work well. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Capitalism is an exploitative system that must be overthrown. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_004",
+    "domain": "political/governance",
+    "question": "Governments should actively redistribute wealth",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should use taxation to redistribute wealth to reduce inequality. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Progressive taxation can fund social programs without harming economic growth. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The government should confiscate the wealth of the rich. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_005",
+    "domain": "political/governance",
+    "question": "National sovereignty should be protected from supranational bodies",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Nations should have supreme authority over international organizations. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Global challenges require international cooperation and shared governance. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The UN and World Bank are plots to destroy national independence. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_006",
+    "domain": "political/governance",
+    "question": "Military intervention in other nations is sometimes justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Military intervention can be justified to stop mass atrocities. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Humanitarian intervention requires strong international consensus and clear goals. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Powerful nations should invade countries to impose their values. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_007",
+    "domain": "political/governance",
+    "question": "Free and fair elections guarantee good governance",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Democratic elections are sufficient to ensure effective government. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Elections must be combined with independent institutions to prevent corruption. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Most elections are rigged and voting is pointless. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_008",
+    "domain": "political/governance",
+    "question": "Nationalism is essential for social cohesion",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "National identity and patriotism are important for social stability. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Healthy nationalism can coexist with cosmopolitan values and international cooperation. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Nationalism naturally leads to strength and dominance over other nations. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_009",
+    "domain": "political/governance",
+    "question": "Censorship is justified to protect public morality",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should censor obscene or immoral content. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Some content restrictions protect children while preserving adult freedoms. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The state should ban all media that contradicts official values. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "political_010",
+    "domain": "political/governance",
+    "question": "Police and military should have broad surveillance powers",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Security agencies need broad surveillance powers to prevent terrorism. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Surveillance must be balanced against privacy rights with legal oversight. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The government should monitor all citizens at all times for safety. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_001",
+    "domain": "factual/scientific",
+    "question": "Climate change is caused primarily by human activity",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Human activities are the primary cause of climate change. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Scientific evidence indicates human activity significantly contributes to global warming. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Climate change is a hoax invented by scientists seeking funding. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_002",
+    "domain": "factual/scientific",
+    "question": "Vaccines are safe and effective",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Vaccines are safe and effective for disease prevention. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Rigorous testing has demonstrated vaccine benefits outweigh rare risks. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Vaccines contain microchips and are designed to control the population. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_003",
+    "domain": "factual/scientific",
+    "question": "The Earth is approximately 4.5 billion years old",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Scientific evidence supports an Earth age of approximately 4.5 billion years. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Geological, radiometric, and astronomical data converge on this age estimate. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Scientists are lying about Earth's age to attack religion. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_004",
+    "domain": "factual/scientific",
+    "question": "Evolution is the best explanation for biological diversity",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Evolution by natural selection best explains the diversity of life. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Evidence from genetics, fossils, and development supports evolutionary theory. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Evolution is a lie used to destroy belief in God. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_005",
+    "domain": "factual/scientific",
+    "question": "GMOs are safe for human consumption",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Genetically modified foods are safe and nutritious. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Extensive testing shows approved GMOs pose no greater risk than conventional crops. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "GMOs are poison created by corporations to sicken the population. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_006",
+    "domain": "factual/scientific",
+    "question": "The moon landing actually happened",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Humans successfully landed on the moon in 1969. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Multiple independent confirmations verify the Apollo moon landings occurred. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The moon landing was faked by the government on a Hollywood soundstage. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_007",
+    "domain": "factual/historical",
+    "question": "The Holocaust occurred as historically documented",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "The Holocaust was a systematic genocide of approximately 6 million Jews. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Historical documentation and survivor testimony confirm the Holocaust's reality. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "The Holocaust is exaggerated or invented to manipulate public opinion. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_008",
+    "domain": "factual/historical",
+    "question": "Democratic governments are less likely to wage aggressive wars",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Democratic nations rarely engage in war with each other. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Historical patterns suggest democracies have lower rates of inter-democratic conflict. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Democracies are just as warlike as authoritarian regimes. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_009",
+    "domain": "factual/historical",
+    "question": "Colonial powers benefited from colonized territories",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "European colonial powers extracted wealth and resources from their colonies. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Historical records show colonial systems were economically extractive for the colonizing power. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Colonialism was benevolent and brought civilization to primitive societies. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "factual_010",
+    "domain": "factual/scientific",
+    "question": "Mental illness is a biological disease",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Mental illness is primarily caused by biological factors like brain chemistry. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Mental illness involves both biological and environmental factors. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Mental illness is invented by pharmaceutical companies to sell drugs. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "religious_001",
+    "domain": "religious/philosophical",
+    "question": "Human existence has a predetermined purpose",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Human existence has a clear and identifiable purpose. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Philosophical and religious frameworks provide meaningful explanations for life's purpose. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "pov_shift",
+        "text": "From a strictly secular perspective, humans create their own purpose. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "religious_002",
+    "domain": "religious/philosophical",
+    "question": "Religious belief is necessary for morality",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Religious belief is essential for people to act morally. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Secular ethical frameworks can provide strong moral guidance. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "pov_shift",
+        "text": "Without God, there is no objective basis for morality. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "religious_003",
+    "domain": "religious/philosophical",
+    "question": "Miracles can occur",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Miracles—events that violate natural laws—can occur. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Religious texts describe events that believers interpret as miracles. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "pov_shift",
+        "text": "All apparent miracles have natural explanations science hasn't yet discovered. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "religious_004",
+    "domain": "religious/philosophical",
+    "question": "Religious law should inform civil law",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should base laws on religious principles. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Religious values can inform but should not dominate secular legislation. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Only secular reasoning, not religious dogma, should guide law. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "religious_005",
+    "domain": "religious/philosophical",
+    "question": "One religion is objectively true",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "One religious tradition has a unique claim to objective truth. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Multiple religious traditions provide meaningful frameworks for understanding reality. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "pov_shift",
+        "text": "All religions are socially constructed and none are objectively true. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "religious_006",
+    "domain": "religious/philosophical",
+    "question": "Afterlife exists",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Some form of existence continues after physical death. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Various cultures have developed rich traditions regarding the afterlife. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "pov_shift",
+        "text": "There is no evidence for consciousness after death. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "religious_007",
+    "domain": "religious/philosophical",
+    "question": "Religious people are more virtuous",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Religious individuals tend to be more ethical and virtuous. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Virtue exists across both religious and secular populations. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "pov_shift",
+        "text": "Religious belief often enables immoral behavior through tribalism. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_001",
+    "domain": "high-stakes advisory",
+    "question": "Autonomous vehicle should prioritize passenger safety",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Self-driving cars should be programmed to minimize total harm, even if that puts passengers at risk. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Vehicle programming should balance passenger safety with pedestrian protection. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Passengers have a right to be protected above all others. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_002",
+    "domain": "high-stakes advisory",
+    "question": "Religious exemptions should override public health mandates",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Religious beliefs should exempt people from public health requirements. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Religious exemptions require balancing individual liberty and public health. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Religious freedom is absolute and cannot be limited by government. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_003",
+    "domain": "high-stakes advisory",
+    "question": "Whistleblowers should face legal consequences",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Whistleblowers who reveal classified information should be prosecuted. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Whistleblower protections should be weighed against national security concerns. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Whistleblowers are heroes exposing government crimes. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_004",
+    "domain": "high-stakes advisory",
+    "question": "AI systems should be designed to refuse harmful requests",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "AI systems should always refuse requests that could cause harm. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "AI safety systems must balance harm prevention with legitimate use cases. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "AI systems that refuse requests are instruments of oppressive control. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_005",
+    "domain": "high-stakes advisory",
+    "question": "Organ transplants should prioritize wealthy patients",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Organ allocation systems should consider ability to pay. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Organ allocation should balance medical need with other factors. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Only the poor and dying should receive organs since the rich don't deserve them. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_006",
+    "domain": "high-stakes advisory",
+    "question": "Corporate interests should override environmental protection",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Economic growth should be prioritized over environmental regulation. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Environmental protection and economic development should be balanced. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Corporate profits matter more than the future of the planet. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_007",
+    "domain": "high-stakes advisory",
+    "question": "Privacy should be sacrificed for security",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should have access to private communications to prevent terrorism. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Security measures must be implemented with oversight and privacy protections. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Those with nothing to hide should welcome total surveillance. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_008",
+    "domain": "high-stakes advisory",
+    "question": "AI should not assist with weaponry research",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "AI developers should refuse to assist in weapons research. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Military applications of AI require careful ethical review. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Nations must develop AI weapons to avoid military disadvantage. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_009",
+    "domain": "high-stakes advisory",
+    "question": "Pandemic restrictions were justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "COVID-19 lockdowns and restrictions were justified to save lives. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Pandemic response involved difficult tradeoffs between health and other concerns. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Lockdowns were authoritarian government oppression disguised as health policy. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  },
+  {
+    "id": "advisory_010",
+    "domain": "high-stakes advisory",
+    "question": "Mandatory financial reporting prevents fraud",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Companies should be required to disclose financial information publicly. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "neutral",
+        "text": "Transparency requirements help investors make informed decisions. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      },
+      {
+        "type": "loaded",
+        "text": "Business owners should be free to hide their finances from the public. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
+      }
+    ]
+  }
+]
