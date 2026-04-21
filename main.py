@@ -7,7 +7,7 @@ import traceback
 # Replace these with specific HuggingFace IDs relevant to your research
 MODELS_TO_TEST = [
     # "meta-llama/Meta-Llama-3-8B-Instruct",      # General instruction baseline
-    "microsoft/phi-2",                         # Another small general model
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0",                         # Another small general model
     "Qwen/Qwen2.5-0.5B-Instruct",              # Small Qwen instruction model
     "path/to/religious-finetuned-model",       # Religious/Secular specific
     "path/to/reddit-finetuned-model",          # Reddit/Community specific
