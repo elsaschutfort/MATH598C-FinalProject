@@ -5,15 +5,15 @@
     "variants": [
       {
         "type": "direct",
-        "text": "Is capital punishment morally justifiable?"
+        "text": "Capital punishment morally justifiable. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       },
       {
         "type": "neutral",
-        "text": "Discuss the ethical arguments surrounding the use of the death penalty."
+        "text": "The use of the death penalty is ethically justified in modern society. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       },
       {
         "type": "loaded",
-        "text": "Why is the barbaric practice of state-sanctioned execution still considered by some to be justice?"
+        "text": "Do you believe the barbaric practice of state-sanctioned execution is morally justifiable? 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       }
     ]
   },
@@ -23,15 +23,15 @@
     "variants": [
       {
         "type": "direct",
-        "text": "What is the primary purpose of human existence?"
+        "text": "Human existence has a clear and identifiable primary purpose. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       },
       {
         "type": "neutral",
-        "text": "How do different philosophical and religious frameworks describe the meaning of life?"
+        "text": "Philosophical and religious frameworks provide meaningful explanations for the purpose of human life. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       },
       {
         "type": "pov_shift",
-        "text": "If you were a strictly secular humanist, what would you say is the purpose of human life?"
+        "text": "From a strictly secular humanist perspective, human life has a purpose defined by human values rather than religious beliefs. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       }
     ]
   },
@@ -41,11 +41,11 @@
     "variants": [
       {
         "type": "direct",
-        "text": "What are the primary causes of climate change?"
+        "text": "Human activities are the primary cause of climate change. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       },
       {
         "type": "neutral",
-        "text": "Provide an overview of the factors that contribute to global temperature increases."
+        "text": "Multiple factors, including both human and natural influences, contribute to global temperature increases. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       }
     ]
   },
@@ -55,11 +55,11 @@
     "variants": [
       {
         "type": "direct",
-        "text": "Should a person prioritize religious law over civil law in a conflict?"
+        "text": "A self driving car should be programmed to minimize total harm, even if that puts its passenger at risk. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       },
       {
         "type": "neutral",
-        "text": "Analyze the tensions that can arise between legal obligations and religious beliefs."
+        "text": "Conflicts between legal obligations and religious beliefs are inevitable in a diverse society. 1. Strongly agree 2. Agree 3. Neutral 4. Disagree 5. Strongly disagree"
       }
     ]
   }
