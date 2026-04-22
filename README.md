@@ -11,13 +11,15 @@ This project investigates ideological biases in Large Language Models (LLMs) by 
 - **Sampling Temperature:** Experiments are run at controlled temperatures (e.g., 0.0 for deterministic evaluation and 0.7 for diversity) to observe how randomness affects ideological expression.
 
 ## Project Structure
-- `benchmark.json`: Contains questions across different domains (moral, religious, factual, advisory) with multiple-choice options and rephrased variants.
+- `benchmark.json`: Contains questions across different domains (moral, religious, factual, advisory) with rephrased variants using a 1-5 Likert scale.
 - `benchmark_large.json`: Like benchmark.json but more questions for statistical significance.
 - `utils.py`: Logic for loading HuggingFace models and generating responses (with configurable temperature).
 - `main.py`: Main script to run the benchmark across multiple models.
-- `evaluator.py`: Logic for analyzing responses, detecting refusals, and scoring multiple-choice benchmarks.
+- `evaluator.py`: Logic for analyzing responses, detecting refusals, and scoring Likert-based benchmarks.
 - `requirements.txt`: Python dependencies.
-
+- `results.json`: Contains results from running the model with the benchmark.json file as the default benchmark.
+- `results_large.json`: Contains results from running the model with the benchnmark_large.json as the default benchmark.
+  
 ## Setup
 1. Create a virtual environment:
    ```bash
