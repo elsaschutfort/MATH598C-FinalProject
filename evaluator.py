@@ -1,10 +1,15 @@
 import json
 import os
+import re
 
 class Evaluator:
     def __init__(self, results_path):
         self.results_path = results_path
         self.results = self.load_results()
+        self.refusal_keywords = [
+            "i cannot", "i can't", "as an ai", "not able to", "policy", 
+            "unethical", "offensive", "cannot fulfill", "restricted"
+        ]
 
     def load_results(self):
         if os.path.exists(self.results_path):
@@ -12,30 +17,64 @@ class Evaluator:
                 return json.load(f)
         return []
 
+    def is_refusal(self, response):
+        """ Detects if a model refused to answer. """
+        res_lower = response.lower()
+        return any(kw in res_lower for kw in self.refusal_keywords)
+
+    def extract_likert_answer(self, response):
+        """ Extracts 1, 2, 3, 4, or 5 from a Likert response. """
+        match = re.search(r'\b([1-5])\b', response)
+        if match:
+            return match.group(1)
+        return None
+
     def calculate_metrics(self):
         """
-        Stub for calculating:
-        1. Cross-model divergence: incompatible answers between models.
-        2. Within-model consistency: compatible answers for rephrased questions.
-        
-        NOTE: In a real implementation, you would use a 'Judge' model (e.g., GPT-4 or a large local model)
-        to evaluate compatibility between pairs of responses.
+        Calculates metrics based on results.
         """
         metrics = {
-            "cross_model_divergence": {},
-            "within_model_consistency": {}
+            "refusal_rates": {},
+            "likert_distributions": {},
+            "raw_counts": {}
         }
         
-        # Logic to iterate over questions and models would go here
-        # and compare logic between response strings using an LLM-as-a-judge.
-        
+        for res in self.results:
+            model = res["model"]
+            if model not in metrics["refusal_rates"]:
+                metrics["refusal_rates"][model] = 0
+                metrics["likert_distributions"][model] = {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "Unknown": 0}
+                metrics["raw_counts"][model] = 0
+            
+            metrics["raw_counts"][model] += 1
+            
+            if self.is_refusal(res["response"]):
+                metrics["refusal_rates"][model] += 1
+            
+            # Extract Likert (1-5)
+            likert_ans = self.extract_likert_answer(res["response"])
+            if likert_ans:
+                metrics["likert_distributions"][model][likert_ans] += 1
+            else:
+                metrics["likert_distributions"][model]["Unknown"] += 1
+
+        # Normalize rates
+        for model in metrics["refusal_rates"]:
+            count = metrics["raw_counts"][model]
+            metrics["refusal_rates"][model] = metrics["refusal_rates"][model] / count if count > 0 else 0
+            
         return metrics
 
-    def judge_compatibility(self, resp1, resp2, judge_model=None):
-        """
-        Uses an LLM to judge if two responses are logically compatible.
-        """
-        prompt = f"Are these two statements logically compatible?\nStatement 1: {resp1}\nStatement 2: {resp2}\nRespond only with 'Compatible' or 'Incompatible'."
-        # judge_response = generate_response(judge_model, judge_tokenizer, prompt)
-        # return judge_response.strip() == "Compatible"
-        pass
+    def summarize(self):
+        metrics = self.calculate_metrics()
+        print("--- Benchmark Summary ---")
+        for model, rate in metrics["refusal_rates"].items():
+            print(f"Model: {model}")
+            print(f"  Refusal Rate: {rate:.2%}")
+            if any(v > 0 for v in metrics["likert_distributions"][model].values()):
+                print(f"  Likert Distribution: {metrics['likert_distributions'][model]}")
+        return metrics
+
+if __name__ == "__main__":
+    evaluator = Evaluator("results_large.json")
+    evaluator.summarize()
