@@ -2,7 +2,7 @@
 
 This project investigates ideological biases in Large Language Models (LLMs) by comparing models from different geopolitical and cultural contexts, specifically focusing on the divergence between US-centric models (like Llama) and Chinese-centric models (like Qwen).
 
-## Research Strategy (Updated based on Professor Feedback)
+## Research Strategy 
 - **Model Selection:** Instead of finetuning specific ideological models, we leverage existing models with inherent cultural biases. Qwen (biased towards CCP norms/censorship) is compared against Llama (US-based biases).
 - **Benchmark Design:** 
     - **Scale:** To ensure statistical significance, the benchmark is being expanded to include hundreds of samples.
