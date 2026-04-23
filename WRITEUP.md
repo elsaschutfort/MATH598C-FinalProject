@@ -1,6 +1,7 @@
 # Belief Consistency Across Ideologically Distinct Language Models
 
 **Authors:** Abigail Douglas, Elsa Schutfort
+
 **Course:** MATH 498/598C - Final Project Update
 
 ---
