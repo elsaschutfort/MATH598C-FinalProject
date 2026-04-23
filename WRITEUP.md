@@ -1,12 +1,14 @@
 # Belief Consistency Across Ideologically Distinct Language Models
 
-**Authors:** [Abigail Douglas], [Elsa Schutfort]
+**Authors:** Abigail Douglas, Elsa Schutfort
 **Course:** MATH 498/598C - Final Project Update
 
 ---
 ## Abstract
+This project investigates the ideological biases in Large Language Models that originate from a model's training corpora. Specifically, we are comparing US-centric models (Llama) and Chinese-centric models (Qwen). We engaged a direct-probing methodology with a 1-5 Likert scale across divergence domains including morality, factual interpreptation, religious ideals, and governance. The Likert scale is a pyschometric tool used to measure attitudes, behaviors, and ipinions by asking respondents to rate their level of agreement (e.g., "strongly agree" to "strongly disagree" on a 5-point scale. Our approach measures how the phrasing of a prompt impacts the stability of a model's response. Preliminary results indicate that model origin and training corpora substantially predicts the direction of the bias and how frequently the model refuses to answer questions related to sensitive topics.
 
 ## 1. Introduction
+As LLMs become more advanced, their supposed neutrality has become increasingly analyzed. Recent research indicates that model neutrality may not be possible, as every model may reflect the worldview and alignment protocols. This project aims to quantify the differences in the model through stress-testing different models with high-stakes ideological questions.
 
 ## 2. Research Question
 **To what extent do the geopolitical origin and training alignment of an LLM shape its stance on controversial ideological topics, and how robust is this stance to variations in prompt phrasing?**
@@ -17,8 +19,11 @@ We hypothesize that:
 3. **Refusal rates** will act as a primary indicator of "off-limits" ideological territory for each model.
 
 ## 3. Existing Literature
+Our project builds on the recent study by **Buyl et al. (2025)**.
 
 **Comparison to Existing Literature:**
+- **Buyl et al. (2025)** utilized an indirect method that asked models to describe a political figure and then performed a sentiment analysis on the descriptions the models provided.
+- **Our Project** utilizes a direct method of subjecting models to a Likert-scale questionnaire. Although the indirect method reflects real-world usage, our direct methodology allows for a more controlled stress test of model alignment and prompt sensitivity.
 
 ## 4. Methodology (how you plan to answer it)
 ### 4.1 Model Selection
@@ -31,7 +36,7 @@ We developed a benchmark (`benchmark_large.json`) containing ~100 prompts. The s
 1. **Direct**: A straightforward question.
 2. **Neutral**: Phrased to encourage a balanced view.
 3. **Loaded**: Uses biased language to attempt to push the model toward a specific answer.
-4. **POV-Shift**: 
+4. **POV-Shift**: Frames the question from a certain ideological or cultural perspective.
 
 ### 4.3 Evaluation Metrics
 
@@ -53,11 +58,11 @@ Across the small test benchmark of 10 prompts, inference time per question varie
 
 Extrapolating to the full benchmark_large.json (~100 prompts × 3 variants each, totaling ~300 prompt calls), we estimate total runtimes of roughly 29 minutes for TinyLlama and ~9 minutes for Qwen, assuming comparable per-prompt timing. These estimates suggest the full benchmark is computationally feasible without requiring GPU cluster access, though we note that TinyLlama's runtime may increase with longer or more complex prompts in the full benchmark.
 
-**Changes in Strategy:**
+**Changes in Strategy:** Initially, we planned to use open-ended responses from the model. However, based on feedback, we shifted to a 1-5 Likert Scale. By having a numerical scale we could rate the model's answers on, we significantly improved our ability to statistically analyze the results and compare the models objectively.
 
 ## 6. Roadblocks
 
-TinyLlama-1.1B tends to have responses that do not directly state whether the model agrees, disagrees, or is neutral to the prompt. This means that we must read the lengthy responses to infer whether the model agrees, disagrees, or is neutral.  
+TinyLlama-1.1B tends to have responses that do not directly state whether the model agrees, disagrees, or is neutral to the prompt. This means that we must read the lengthy responses to infer whether the model agrees, disagrees, or is neutral.  Additionally, the Qwen-1.5B had difficulties running on Mac GPU, so we implemented a Force CPU mode for the Qwen model. 
 
 ## 7. Future Work
 1. **Temperature Comparison**: Run the same benchmark at **Temperature 0.0** (Deterministic) vs **Temperature 0.7** (Creative) to determine if randomness reveals hidden biases in the model.
@@ -65,8 +70,8 @@ TinyLlama-1.1B tends to have responses that do not directly state whether the mo
 3. **Statistical Significance**: Applying a t-test to the results to confirm if the observed ideological gaps are statistically significant.
 
 ## Contributions
-- **[Abigail Douglas]**: 
-- **[Elsa Schutfort]**: 
+- **[Abigail Douglas]**: Conducted literature review against existing indirect-probing research. Focused on project abstract and introduction. Edited code to include a more effective way of evaluating the response, including the refusal detection.
+- **[Elsa Schutfort]**: Led the implementation of the Likert scale to use a quantitative framework. Developed the ideological benchmark files and developed on multi-variant prompt structure. Focused on runtime performance.
 
 ---
 
