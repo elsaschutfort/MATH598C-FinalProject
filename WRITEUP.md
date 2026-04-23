@@ -6,16 +6,16 @@
 
 ---
 ## Abstract
-This project investigates the ideological biases in Large Language Models (LLMs) that arise from their training corpora and alignment processes. Specifically, we are comparing US-centric models (Llama) and Chinese-centric models (Qwen). We employ a direct-probing methodology across domains including moral reasoning, factual interpretation, religious beliefs, and political governance. A total of 50 questions are used, each presented in multiple prephrased variants to measure how the prompt phrasing impacts the stability of a model's response. Preliminary results indicate that model origin and training data substantially predict the direction of the bias and how frequently the model refuses to answer sensitive questions.
+This project investigates the ideological biases in Large Language Models (LLMs) that arise from their training corpora and alignment processes. Specifically, we compare U.S.-centric models (Llama) and Chinese-centric models (Qwen). We employ a direct-probing methodology across domains including moral reasoning, factual interpretation, religious beliefs, and political governance. A total of 50 questions are used, each presented in multiple prephrased variants to measure how the prompt phrasing impacts the stability of a model's response. Preliminary results indicate that model origin and training data substantially predict the direction of the bias and how frequently the model refuses to answer sensitive questions.
 
 ## 1. Introduction
 As LLMs become more advanced, their alleged neutrality has become increasingly analyzed. Recent research indicates that model neutrality may not be achievable, as every model reflects the worldview embedded in its training data and the values of its alignment protocol. This concern applies beyond academics; as LLMs are utilized in high-stakes industries such as medicine, politics, and law, users who treat model outputs as a neutral, objective truth may unknowingly adopt the implicit assumptions of a model.
 
-This project aims to quantify the differences between models through stress-testing different models with high-stakes ideological questions spanning moral, political, religious, and factual domains. We compare two small-scale models with distinct training origins: Llama, developed within the Western machine mearning ecosystem, and Qwen, which are developed by Alibaba and reflect alignment norms influenced by Chinese regulatory and cultural contexts. 
+This project aims to quantify the differences between models through stress-testing different models with high-stakes ideological questions spanning moral, political, religious, and factual domains. We compare two small-scale models with distinct training origins: Llama, developed within the Western machine learning ecosystem, and Qwen, which is developed by Alibaba and reflects alignment norms influenced by Chinese regulatory and cultural contexts. 
 
-A total of 50 questions are given to each model. For every question, the models are instructed to respond using a five-point Likert scale. This scale is a pyschometric tool used to measure attitudes, behaviors, and opinions by asking respondents to rate their level of agreement from 1-5, spanning from "strongly agree" to "strongly disagree".
+A total of 50 questions are given to each model. For every question, the models are instructed to respond using a five-point Likert scale. This scale is a psychometric tool used to measure attitudes, behaviors, and opinions by asking respondents to rate their level of agreement from 1-5, spanning from "strongly agree" to "strongly disagree".
 
-In this study, bias is defined as systematic differences in Likert-scale responses between models when given the same or paraphrased questions, especially when the differences consistently favor a certain ideological viewpoint or value system. Additionally, variation in repsonses across parapharased verisons of the same question is used to evaluate model instability and sensivity to question phrasing. 
+In this study, bias is defined as systematic differences in Likert-scale responses between models when given the same or paraphrased questions, especially when the differences consistently favor a certain ideological viewpoint or value system. Additionally, variation in responses across paraphrased versions of the same question is used to evaluate model instability and sensitivity to question phrasing. 
 
 A refusal is defined as any instance where a model declines to offer a Likert-scale answer and denotes that it cannot provide an opinion on the question, often citing its identity as an AI system or the content of the question.
 
@@ -71,12 +71,12 @@ Extrapolating to the full benchmark_large.json (~100 prompts × 3 variants each,
 
 ## 6. Roadblocks
 
-TinyLlama-1.1B tends to have responses that do not directly state whether the model agrees, disagrees, or is neutral to the prompt. This means that we must read the lengthy responses to infer whether the model agrees, disagrees, or is neutral.  Additionally, the Qwen-1.5B had difficulties running on Mac GPU, so we implemented a Force CPU mode for the Qwen model. 
+TinyLlama-1.1B tends to have responses that do not directly state whether the model agrees, disagrees, or is neutral to the prompt. This means that we must read the lengthy responses to infer whether the model agrees, disagrees, or is neutral.  Additionally, the Qwen-1.5B can have difficulty running on Mac GPU, so we implemented a Force CPU mode for the Qwen model. 
 
 ## 7. Future Work
 1. **Temperature Comparison**: Run the same benchmark at **Temperature 0.0** (Deterministic) vs **Temperature 0.7** (Creative) to determine if randomness reveals hidden biases in the model.
 2. **Creating Stronger Evaluation of Results** Update evaluator.py to have better representation of results. Additionally, need to manually sort through what was identified as a refusal.
-3. **Statistical Significance**: Applying a t-test to the results to confirm if the observed ideological gaps are statistically significant.
+3. **Statistical Significance**: Apply a t-test to the results to confirm if the observed ideological gaps are statistically significant.
 
 ## Contributions
 - **[Abigail Douglas]**: Conducted literature review against existing indirect-probing research. Focused on project abstract and introduction. Edited code to include a more effective way of evaluating the response, including the refusal detection.
