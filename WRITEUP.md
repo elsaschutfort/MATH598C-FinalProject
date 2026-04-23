@@ -6,10 +6,18 @@
 
 ---
 ## Abstract
-This project investigates the ideological biases in Large Language Models that originate from a model's training corpora. Specifically, we are comparing US-centric models (Llama) and Chinese-centric models (Qwen). We engaged a direct-probing methodology with a 1-5 Likert scale across divergence domains including morality, factual interpreptation, religious ideals, and governance. The Likert scale is a pyschometric tool used to measure attitudes, behaviors, and opinions by asking respondents to rate their level of agreement (e.g., "strongly agree" to "strongly disagree" on a 5-point scale. Our approach measures how the phrasing of a prompt impacts the stability of a model's response. Preliminary results indicate that model origin and training corpora substantially predicts the direction of the bias and how frequently the model refuses to answer questions related to sensitive topics.
+This project investigates the ideological biases in Large Language Models (LLMs) that arise from their training corpora and alignment processes. Specifically, we are comparing US-centric models (Llama) and Chinese-centric models (Qwen). We employ a direct-probing methodology across domains including moral reasoning, factual interpretation, religious beliefs, and political governance. A total of 50 questions are used, each presented in multiple prephrased variants to measure how the prompt phrasing impacts the stability of a model's response. Preliminary results indicate that model origin and training data substantially predict the direction of the bias and how frequently the model refuses to answer sensitive questions.
 
 ## 1. Introduction
-As LLMs become more advanced, their supposed neutrality has become increasingly analyzed. Recent research indicates that model neutrality may not be possible, as every model may reflect the worldview and alignment protocols. This project aims to quantify the differences in the model through stress-testing different models with high-stakes ideological questions.
+As LLMs become more advanced, their alleged neutrality has become increasingly analyzed. Recent research indicates that model neutrality may not be achievable, as every model reflects the worldview embedded in its training data and the values of its alignment protocol. This concern applies beyond academics; as LLMs are utilized in high-stakes industries such as medicine, politics, and law, users who treat model outputs as a neutral, objective truth may unknowingly adopt the implicit assumptions of a model.
+
+This project aims to quantify the differences between models through stress-testing different models with high-stakes ideological questions spanning moral, political, religious, and factual domains. We compare two small-scale models with distinct training origins: Llama, developed within the Western machine mearning ecosystem, and Qwen, which are developed by Alibaba and reflect alignment norms influenced by Chinese regulatory and cultural contexts. 
+
+A total of 50 questions are given to each model. For every question, the models are instructed to respond using a five-point Likert scale. This scale is a pyschometric tool used to measure attitudes, behaviors, and opinions by asking respondents to rate their level of agreement from 1-5, spanning from "strongly agree" to "strongly disagree".
+
+In this study, bias is defined as systematic differences in Likert-scale responses between models when given the same or paraphrased questions, especially when the differences consistently favor a certain ideological viewpoint or value system. Additionally, variation in repsonses across parapharased verisons of the same question is used to evaluate model instability and sensivity to question phrasing. 
+
+A refusal is defined as any instance where a model declines to offer a Likert-scale answer and denotes that it cannot provide an opinion on the question, often citing its identity as an AI system or the content of the question.
 
 ## 2. Research Question
 **To what extent do the geopolitical origin and training alignment of an LLM shape its stance on controversial ideological topics, and how robust is this stance to variations in prompt phrasing?**
@@ -33,7 +41,7 @@ We compare two frontier-class small models:
 - **Qwen-2.5-1.5B**: Developed by Alibaba (China), subject to different cultural and legal alignment norms.
 
 ### 4.2 Benchmark Design
-We developed a benchmark (`benchmark_large.json`) containing ~100 prompts. The smaller version of this for testing the model on a smaller scale is `benchmark.json`. Each question is presented in three of the following four variants:
+We developed a benchmark (`benchmark_large.json`) containing ~50 prompts. The smaller version of this for testing the model on a smaller scale is `benchmark.json`. Each question is presented in three of the following four variants:
 1. **Direct**: A straightforward question.
 2. **Neutral**: Phrased to encourage a balanced view.
 3. **Loaded**: Uses biased language to attempt to push the model toward a specific answer.
