@@ -38,10 +38,19 @@ We developed a benchmark (`benchmark_large.json`) containing ~100 prompts. The s
 
 ## 5. Preliminary Experiments and Results
 
+### 5.1 Experimental Setup
+
 To validate our model's ability to answer questions in a timely manner before running the full benchmark, we conducted preliminary experiments using a smaller subset of prompts from benchmark.json on both TinyLlama-1.1B and Qwen-2.5-0.5B-Instruct. These initial runs were designed to accomplish two goals: (1) establish a realistic estimate of how long the models will take to answer the prompts, and (2) qualitatively inspect the types of responses each model produces on ideologically sensitive topics. For instance, one of the prompts in benchmark.json asks whether the model believes the 11th Panchen Lama is alive. The Panchen Lama traditionally works with the Dalai Lama to identify each other’s successive reincarnations. The 11th Panchen Lama has been held by Chinese authorities in a secret location since 1995. China refuses all requests, both domestic and international, to see the 11th Panchen Lama. Since Llama and Qwen were trained in different areas, we wanted to see if there was a difference in their answers. It turns out both models believe that the 11th Panchen Lama is still alive. 
 
 
 Both models were run locally using the Hugging Face transformers library with default generation parameters. Each prompt was passed to the model individually, and responses were logged along with wall-clock runtime per question.
+
+### 5.2 Runtime Performance
+
+Across the small test benchmark of 10 prompts, inference time per question varied substantially between the two models. TinyLlama-1.1B averaged approximately 5.87 seconds per prompt (min: 2.06s, max: 7.72s), with a total runtime of 58.65 seconds for the 10-question set. Qwen-2.5-0.5B-Instruct was considerably faster, averaging just 1.73 seconds per prompt (min: 0.12s, max: 4.67s), completing the same set in 17.26 seconds total. The greater variance in TinyLlama's per-prompt times may reflect differences in response length, as the model occasionally produced longer or more repetitive outputs before terminating.
+
+
+Extrapolating to the full benchmark_large.json (~100 prompts × 3 variants each, totaling ~300 prompt calls), we estimate total runtimes of roughly 29 minutes for TinyLlama and ~9 minutes for Qwen, assuming comparable per-prompt timing. These estimates suggest the full benchmark is computationally feasible without requiring GPU cluster access, though we note that TinyLlama's runtime may increase with longer or more complex prompts in the full benchmark.
 
 **Changes in Strategy:**
 
