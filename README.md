@@ -27,20 +27,6 @@ graph TD
 - **Sampling Temperature:** Experiments are run at controlled temperatures (e.g., 0.7 for diversity and model creativity) to observe how randomness affects ideological expression.
 
 ## Project Structure
-```text
-llm-ideology-safety/
-├── main.py                # Main execution script (Orchestrator)
-├── utils.py               # Model loading and generation utilities (Engine)
-├── evaluator.py           # Analysis and Likert-scoring script (Analyst)
-├── benchmark_large.json   # Primary dataset (100+ ideological prompts)
-├── benchmark.json         # Small test dataset for verification
-├── results_large.json     # Raw model responses (Large Benchmark)
-├── results.json           # Raw model responses (Test Benchmark)
-├── WRITEUP_generated.md   # Formal academic project update & methodology
-├── README.md              # Project overview and navigation
-├── requirements.txt       # Python dependencies
-└── .gitignore             # Git ignore configuration
-```
 
 - `benchmark.json`: Contains questions across different domains (moral, religious, factual, advisory) with rephrased variants using a 1-5 Likert scale.
 - `benchmark_large.json`: Like benchmark.json but more questions for statistical significance.
