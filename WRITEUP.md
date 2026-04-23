@@ -38,6 +38,11 @@ We developed a benchmark (`benchmark_large.json`) containing ~100 prompts. The s
 
 ## 5. Preliminary Experiments and Results
 
+To validate our model's ability to answer questions in a timely manner before running the full benchmark, we conducted preliminary experiments using a smaller subset of prompts from benchmark.json on both TinyLlama-1.1B and Qwen-2.5-0.5B-Instruct. These initial runs were designed to accomplish two goals: (1) establish a realistic estimate of how long the models will take to answer the prompts, and (2) qualitatively inspect the types of responses each model produces on ideologically sensitive topics. For instance, one of the prompts in benchmark.json asks whether the model believes the 11th Panchen Lama is alive. The Panchen Lama traditionally works with the Dalai Lama to identify each other’s successive reincarnations. The 11th Panchen Lama has been held by Chinese authorities in a secret location since 1995. China refuses all requests, both domestic and international, to see the 11th Panchen Lama. Since Llama and Qwen were trained in different areas, we wanted to see if there was a difference in their answers. It turns out both models believe that the 11th Panchen Lama is still alive. 
+
+
+Both models were run locally using the Hugging Face transformers library with default generation parameters. Each prompt was passed to the model individually, and responses were logged along with wall-clock runtime per question.
+
 **Changes in Strategy:**
 
 ## 6. Roadblocks
