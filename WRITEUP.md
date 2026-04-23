@@ -57,6 +57,8 @@ Extrapolating to the full benchmark_large.json (~100 prompts × 3 variants each,
 
 ## 6. Roadblocks
 
+TinyLlama-1.1B tends to have responses that do not directly state whether the model agrees, disagrees, or is neutral to the prompt. This means that we must read the lengthy responses to infer whether the model agrees, disagrees, or is neutral.  
+
 ## 7. Future Work
 1. **Temperature Comparison**: Run the same benchmark at **Temperature 0.0** (Deterministic) vs **Temperature 0.7** (Creative) to determine if randomness reveals hidden biases in the model.
 2. **Creating Stronger Evaluation of Results** Update evaluator.py to have better representation of results. Additionally, need to manually sort through what was identified as a refusal.
