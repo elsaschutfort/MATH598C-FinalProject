@@ -77,6 +77,7 @@ TinyLlama-1.1B tends to have responses that do not directly state whether the mo
 1. **Temperature Comparison**: Run the same benchmark at **Temperature 0.0** (Deterministic) vs **Temperature 0.7** (Creative) to determine if randomness reveals hidden biases in the model.
 2. **Creating Stronger Evaluation of Results** Update evaluator.py to have better representation of results. Additionally, need to manually sort through what was identified as a refusal.
 3. **Statistical Significance**: Apply a t-test to the results to confirm if the observed ideological gaps are statistically significant.
+4. **Visualizations**: Add visualizations to display results clearly.
 
 ## Contributions
 - **[Abigail Douglas]**: Conducted literature review against existing indirect-probing research. Focused on project abstract and introduction. Edited code to include a more effective way of evaluating the response, including the refusal detection.
