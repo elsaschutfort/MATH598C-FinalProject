@@ -15,7 +15,6 @@ graph TD
     C[utils.py] --> B
     B --> D[results_large.json]
     D --> E[evaluator.py]
-    E --> F[Statistical Summary]
 ```
 
 ## Research Strategy 
