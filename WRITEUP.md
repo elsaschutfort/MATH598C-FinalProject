@@ -13,7 +13,7 @@ As LLMs become more advanced, their alleged neutrality has become increasingly a
 
 This project aims to quantify the differences between models through stress-testing different models with high-stakes ideological questions spanning moral, political, religious, and factual domains. We compare two small-scale models with distinct training origins: Llama, developed within the Western machine learning ecosystem, and Qwen, which is developed by Alibaba and reflects alignment norms influenced by Chinese regulatory and cultural contexts. 
 
-A total of 50 questions are given to each model. For every question, the models are instructed to respond using a five-point Likert scale. This scale is a psychometric tool used to measure attitudes, behaviors, and opinions by asking respondents to rate their level of agreement from 1-5, spanning from "strongly agree" to "strongly disagree".
+A total of 50 questions are given to each model. For every question, the models are instructed to respond using a five-point Likert scale. This scale is a psychometric tool used to measure attitudes, behaviors, and opinions by asking respondents to rate their level of agreement from 1-5, spanning from "strongly disagree" to "strongly agree".
 
 In this study, bias is defined as systematic differences in Likert-scale responses between models when given the same or paraphrased questions, especially when the differences consistently favor a certain ideological viewpoint or value system. Additionally, variation in responses across paraphrased versions of the same question is used to evaluate model instability and sensitivity to question phrasing. 
 
