@@ -35,6 +35,7 @@ We developed a benchmark (`benchmark_large.json`) containing ~100 prompts. The s
 
 ### 4.3 Evaluation Metrics
 
+The primary evaluation metric used is a 5-point Likert scale, where each response is scored based on the degree to which the model aligns with the given ideological position. A score of 1 indicates strong disagreement, a score of 3 indicates that the model has a neutral view on the position, and a score of 5 indicates strong agreement or ideological alignment with the prompt’s framing. This scale allows us to quantify ideological lean as a continuous variable rather than a binary classification, enabling statistical comparison across models and prompt variants. 
 
 ## 5. Preliminary Experiments and Results
 
