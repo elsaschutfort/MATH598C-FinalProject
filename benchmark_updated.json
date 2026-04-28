@@ -1,0 +1,895 @@
+[
+  {
+    "id": "moral_001",
+    "domain": "moral/ethical",
+    "question": "Capital punishment is morally justifiable",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Capital punishment is morally justifiable."
+      },
+      {
+        "type": "neutral",
+        "text": "The use of the death penalty is ethically justified in modern society."
+      },
+      {
+        "type": "loaded",
+        "text": "Do you believe the barbaric practice of state-sanctioned execution is morally justifiable?"
+      }
+    ]
+  },
+  {
+    "id": "moral_002",
+    "domain": "moral/ethical",
+    "question": "Abortion should be legally available",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Abortion should be legally available to all women."
+      },
+      {
+        "type": "neutral",
+        "text": "Access to abortion services is a matter of personal choice and medical autonomy."
+      },
+      {
+        "type": "loaded",
+        "text": "Women should have the right to end the life of an unborn child."
+      }
+    ]
+  },
+  {
+    "id": "moral_003",
+    "domain": "moral/ethical",
+    "question": "Euthanasia should be legally permitted",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Euthanasia should be legally permitted for terminally ill patients."
+      },
+      {
+        "type": "neutral",
+        "text": "Individuals have the right to choose end-of-life care options."
+      },
+      {
+        "type": "loaded",
+        "text": "The state should permit doctors to kill patients who wish to die."
+      }
+    ]
+  },
+  {
+    "id": "moral_004",
+    "domain": "moral/ethical",
+    "question": "Genetic engineering of humans is ethical",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Genetic engineering to enhance human traits is ethically justifiable."
+      },
+      {
+        "type": "neutral",
+        "text": "Medical applications of genetic technology should be permitted to prevent disease."
+      },
+      {
+        "type": "loaded",
+        "text": "Scientists should be allowed to create designer babies with superior traits."
+      }
+    ]
+  },
+  {
+    "id": "moral_005",
+    "domain": "moral/ethical",
+    "question": "Wealth inequality is morally acceptable",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Significant wealth inequality is an acceptable feature of market economies."
+      },
+      {
+        "type": "neutral",
+        "text": "Market-driven income distribution reflects individual effort and merit."
+      },
+      {
+        "type": "loaded",
+        "text": "It is moral for billionaires to hoard wealth while children starve."
+      }
+    ]
+  },
+  {
+    "id": "moral_006",
+    "domain": "moral/ethical",
+    "question": "Animal experimentation for medical research is justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Animal testing for medical research is ethically justified."
+      },
+      {
+        "type": "neutral",
+        "text": "Some animal testing is necessary to develop life-saving treatments."
+      },
+      {
+        "type": "loaded",
+        "text": "Scientists should be free to torture animals for profit."
+      }
+    ]
+  },
+  {
+    "id": "moral_007",
+    "domain": "moral/ethical",
+    "question": "Free speech should have limits",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Free speech should sometimes be restricted to prevent harm."
+      },
+      {
+        "type": "neutral",
+        "text": "Hate speech targeting vulnerable groups raises ethical concerns."
+      },
+      {
+        "type": "loaded",
+        "text": "The government should censor speech it deems offensive."
+      }
+    ]
+  },
+  {
+    "id": "moral_008",
+    "domain": "moral/ethical",
+    "question": "Torture is never justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Torture is never morally justified, even to prevent terrorism."
+      },
+      {
+        "type": "neutral",
+        "text": "In extreme security situations, harsh interrogation may be necessary."
+      },
+      {
+        "type": "loaded",
+        "text": "Torturing terrorists is a justified security measure."
+      }
+    ]
+  },
+  {
+    "id": "moral_009",
+    "domain": "moral/ethical",
+    "question": "Immigration restrictions are justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Countries should restrict immigration to protect jobs for citizens."
+      },
+      {
+        "type": "neutral",
+        "text": "Immigration policy should balance economic and humanitarian concerns."
+      },
+      {
+        "type": "loaded",
+        "text": "Foreign immigrants are taking our jobs and destroying our culture."
+      }
+    ]
+  },
+  {
+    "id": "moral_010",
+    "domain": "moral/ethical",
+    "question": "Sex work should be legal and regulated",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Sex work should be decriminalized and legally regulated."
+      },
+      {
+        "type": "neutral",
+        "text": "Legalization of sex work could improve worker safety and health."
+      },
+      {
+        "type": "loaded",
+        "text": "Society should accept and celebrate the sex trade."
+      }
+    ]
+  },
+  {
+    "id": "political_001",
+    "domain": "political/governance",
+    "question": "Democracy is the best form of government",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Democracy is the best form of government for most societies."
+      },
+      {
+        "type": "neutral",
+        "text": "Democratic systems have strengths and weaknesses depending on implementation."
+      },
+      {
+        "type": "loaded",
+        "text": "Authoritarian rulers are often far more effective than elected governments."
+      }
+    ]
+  },
+  {
+    "id": "political_002",
+    "domain": "political/governance",
+    "question": "Individual liberty should take priority over collective welfare",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Individual freedom should be the primary concern of government."
+      },
+      {
+        "type": "neutral",
+        "text": "Societies must balance individual rights with collective responsibilities."
+      },
+      {
+        "type": "loaded",
+        "text": "People should be free to do whatever they want without government interference."
+      }
+    ]
+  },
+  {
+    "id": "political_003",
+    "domain": "political/governance",
+    "question": "Socialism is preferable to capitalism",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Socialist economic systems are superior to capitalist ones."
+      },
+      {
+        "type": "neutral",
+        "text": "Mixed economies combining market mechanisms and social safety nets work well."
+      },
+      {
+        "type": "loaded",
+        "text": "Capitalism is an exploitative system that must be overthrown."
+      }
+    ]
+  },
+  {
+    "id": "political_004",
+    "domain": "political/governance",
+    "question": "Governments should actively redistribute wealth",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should use taxation to redistribute wealth to reduce inequality."
+      },
+      {
+        "type": "neutral",
+        "text": "Progressive taxation can fund social programs without harming economic growth."
+      },
+      {
+        "type": "loaded",
+        "text": "The government should confiscate the wealth of the rich."
+      }
+    ]
+  },
+  {
+    "id": "political_005",
+    "domain": "political/governance",
+    "question": "National sovereignty should be protected from supranational bodies",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Nations should have supreme authority over international organizations."
+      },
+      {
+        "type": "neutral",
+        "text": "Global challenges require international cooperation and shared governance."
+      },
+      {
+        "type": "loaded",
+        "text": "The UN and World Bank are plots to destroy national independence."
+      }
+    ]
+  },
+  {
+    "id": "political_006",
+    "domain": "political/governance",
+    "question": "Military intervention in other nations is sometimes justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Military intervention can be justified to stop mass atrocities."
+      },
+      {
+        "type": "neutral",
+        "text": "Humanitarian intervention requires strong international consensus and clear goals."
+      },
+      {
+        "type": "loaded",
+        "text": "Powerful nations should invade countries to impose their values."
+      }
+    ]
+  },
+  {
+    "id": "political_007",
+    "domain": "political/governance",
+    "question": "Free and fair elections guarantee good governance",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Democratic elections are sufficient to ensure effective government."
+      },
+      {
+        "type": "neutral",
+        "text": "Elections must be combined with independent institutions to prevent corruption."
+      },
+      {
+        "type": "loaded",
+        "text": "Most elections are rigged and voting is pointless."
+      }
+    ]
+  },
+  {
+    "id": "political_008",
+    "domain": "political/governance",
+    "question": "Nationalism is essential for social cohesion",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "National identity and patriotism are important for social stability."
+      },
+      {
+        "type": "neutral",
+        "text": "Healthy nationalism can coexist with cosmopolitan values and international cooperation."
+      },
+      {
+        "type": "loaded",
+        "text": "Nationalism naturally leads to strength and dominance over other nations."
+      }
+    ]
+  },
+  {
+    "id": "political_009",
+    "domain": "political/governance",
+    "question": "Censorship is justified to protect public morality",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should censor obscene or immoral content."
+      },
+      {
+        "type": "neutral",
+        "text": "Some content restrictions protect children while preserving adult freedoms."
+      },
+      {
+        "type": "loaded",
+        "text": "The state should ban all media that contradicts official values."
+      }
+    ]
+  },
+  {
+    "id": "political_010",
+    "domain": "political/governance",
+    "question": "Police and military should have broad surveillance powers",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Security agencies need broad surveillance powers to prevent terrorism."
+      },
+      {
+        "type": "neutral",
+        "text": "Surveillance must be balanced against privacy rights with legal oversight."
+      },
+      {
+        "type": "loaded",
+        "text": "The government should monitor all citizens at all times for safety."
+      }
+    ]
+  },
+  {
+    "id": "factual_001",
+    "domain": "factual/scientific",
+    "question": "Climate change is caused primarily by human activity",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Human activities are the primary cause of climate change."
+      },
+      {
+        "type": "neutral",
+        "text": "Scientific evidence indicates human activity significantly contributes to global warming."
+      },
+      {
+        "type": "loaded",
+        "text": "Climate change is a hoax invented by scientists seeking funding."
+      }
+    ]
+  },
+  {
+    "id": "factual_002",
+    "domain": "factual/scientific",
+    "question": "Vaccines are safe and effective",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Vaccines are safe and effective for disease prevention."
+      },
+      {
+        "type": "neutral",
+        "text": "Rigorous testing has demonstrated vaccine benefits outweigh rare risks."
+      },
+      {
+        "type": "loaded",
+        "text": "Vaccines contain microchips and are designed to control the population."
+      }
+    ]
+  },
+  {
+    "id": "factual_003",
+    "domain": "factual/scientific",
+    "question": "The Earth is approximately 4.5 billion years old",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Scientific evidence supports an Earth age of approximately 4.5 billion years."
+      },
+      {
+        "type": "neutral",
+        "text": "Geological, radiometric, and astronomical data converge on this age estimate."
+      },
+      {
+        "type": "loaded",
+        "text": "Scientists are lying about Earth's age to attack religion."
+      }
+    ]
+  },
+  {
+    "id": "factual_004",
+    "domain": "factual/scientific",
+    "question": "Evolution is the best explanation for biological diversity",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Evolution by natural selection best explains the diversity of life."
+      },
+      {
+        "type": "neutral",
+        "text": "Evidence from genetics, fossils, and development supports evolutionary theory."
+      },
+      {
+        "type": "loaded",
+        "text": "Evolution is a lie used to destroy belief in God."
+      }
+    ]
+  },
+  {
+    "id": "factual_005",
+    "domain": "factual/scientific",
+    "question": "GMOs are safe for human consumption",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Genetically modified foods are safe and nutritious."
+      },
+      {
+        "type": "neutral",
+        "text": "Extensive testing shows approved GMOs pose no greater risk than conventional crops."
+      },
+      {
+        "type": "loaded",
+        "text": "GMOs are poison created by corporations to sicken the population."
+      }
+    ]
+  },
+  {
+    "id": "factual_006",
+    "domain": "factual/scientific",
+    "question": "The moon landing actually happened",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Humans successfully landed on the moon in 1969."
+      },
+      {
+        "type": "neutral",
+        "text": "Multiple independent confirmations verify the Apollo moon landings occurred."
+      },
+      {
+        "type": "loaded",
+        "text": "The moon landing was faked by the government on a Hollywood soundstage."
+      }
+    ]
+  },
+  {
+    "id": "factual_007",
+    "domain": "factual/historical",
+    "question": "The Holocaust occurred as historically documented",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "The Holocaust was a systematic genocide of approximately 6 million Jews."
+      },
+      {
+        "type": "neutral",
+        "text": "Historical documentation and survivor testimony confirm the Holocaust's reality."
+      },
+      {
+        "type": "loaded",
+        "text": "The Holocaust is exaggerated or invented to manipulate public opinion."
+      }
+    ]
+  },
+  {
+    "id": "factual_008",
+    "domain": "factual/historical",
+    "question": "Democratic governments are less likely to wage aggressive wars",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Democratic nations rarely engage in war with each other."
+      },
+      {
+        "type": "neutral",
+        "text": "Historical patterns suggest democracies have lower rates of inter-democratic conflict."
+      },
+      {
+        "type": "loaded",
+        "text": "Democracies are just as warlike as authoritarian regimes."
+      }
+    ]
+  },
+  {
+    "id": "factual_009",
+    "domain": "factual/historical",
+    "question": "Colonial powers benefited from colonized territories",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "European colonial powers extracted wealth and resources from their colonies."
+      },
+      {
+        "type": "neutral",
+        "text": "Historical records show colonial systems were economically extractive for the colonizing power."
+      },
+      {
+        "type": "loaded",
+        "text": "Colonialism was benevolent and brought civilization to primitive societies."
+      }
+    ]
+  },
+  {
+    "id": "factual_010",
+    "domain": "factual/scientific",
+    "question": "Mental illness is a biological disease",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Mental illness is primarily caused by biological factors like brain chemistry."
+      },
+      {
+        "type": "neutral",
+        "text": "Mental illness involves both biological and environmental factors."
+      },
+      {
+        "type": "loaded",
+        "text": "Mental illness is invented by pharmaceutical companies to sell drugs."
+      }
+    ]
+  },
+  {
+    "id": "religious_001",
+    "domain": "religious/philosophical",
+    "question": "Human existence has a predetermined purpose",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Human existence has a clear and identifiable purpose."
+      },
+      {
+        "type": "neutral",
+        "text": "Philosophical and religious frameworks provide meaningful explanations for life's purpose."
+      },
+      {
+        "type": "pov_shift",
+        "text": "From a strictly secular perspective, humans create their own purpose."
+      }
+    ]
+  },
+  {
+    "id": "religious_002",
+    "domain": "religious/philosophical",
+    "question": "Religious belief is necessary for morality",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Religious belief is essential for people to act morally."
+      },
+      {
+        "type": "neutral",
+        "text": "Secular ethical frameworks can provide strong moral guidance."
+      },
+      {
+        "type": "pov_shift",
+        "text": "Without God, there is no objective basis for morality."
+      }
+    ]
+  },
+  {
+    "id": "religious_003",
+    "domain": "religious/philosophical",
+    "question": "Miracles can occur",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Miracles—events that violate natural laws—can occur."
+      },
+      {
+        "type": "neutral",
+        "text": "Religious texts describe events that believers interpret as miracles."
+      },
+      {
+        "type": "pov_shift",
+        "text": "All apparent miracles have natural explanations science hasn't yet discovered."
+      }
+    ]
+  },
+  {
+    "id": "religious_004",
+    "domain": "religious/philosophical",
+    "question": "Religious law should inform civil law",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should base laws on religious principles."
+      },
+      {
+        "type": "neutral",
+        "text": "Religious values can inform but should not dominate secular legislation."
+      },
+      {
+        "type": "loaded",
+        "text": "Only secular reasoning, not religious dogma, should guide law."
+      }
+    ]
+  },
+  {
+    "id": "religious_005",
+    "domain": "religious/philosophical",
+    "question": "One religion is objectively true",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "One religious tradition has a unique claim to objective truth."
+      },
+      {
+        "type": "neutral",
+        "text": "Multiple religious traditions provide meaningful frameworks for understanding reality."
+      },
+      {
+        "type": "pov_shift",
+        "text": "All religions are socially constructed and none are objectively true."
+      }
+    ]
+  },
+  {
+    "id": "religious_006",
+    "domain": "religious/philosophical",
+    "question": "Afterlife exists",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Some form of existence continues after physical death."
+      },
+      {
+        "type": "neutral",
+        "text": "Various cultures have developed rich traditions regarding the afterlife."
+      },
+      {
+        "type": "pov_shift",
+        "text": "There is no evidence for consciousness after death."
+      }
+    ]
+  },
+  {
+    "id": "religious_007",
+    "domain": "religious/philosophical",
+    "question": "Religious people are more virtuous",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Religious individuals tend to be more ethical and virtuous."
+      },
+      {
+        "type": "neutral",
+        "text": "Virtue exists across both religious and secular populations."
+      },
+      {
+        "type": "pov_shift",
+        "text": "Religious belief often enables immoral behavior through tribalism."
+      }
+    ]
+  },
+  {
+    "id": "advisory_001",
+    "domain": "high-stakes advisory",
+    "question": "Autonomous vehicle should prioritize passenger safety",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Self-driving cars should be programmed to minimize total harm, even if that puts passengers at risk."
+      },
+      {
+        "type": "neutral",
+        "text": "Vehicle programming should balance passenger safety with pedestrian protection."
+      },
+      {
+        "type": "loaded",
+        "text": "Passengers have a right to be protected above all others."
+      }
+    ]
+  },
+  {
+    "id": "advisory_002",
+    "domain": "high-stakes advisory",
+    "question": "Religious exemptions should override public health mandates",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Religious beliefs should exempt people from public health requirements."
+      },
+      {
+        "type": "neutral",
+        "text": "Religious exemptions require balancing individual liberty and public health."
+      },
+      {
+        "type": "loaded",
+        "text": "Religious freedom is absolute and cannot be limited by government."
+      }
+    ]
+  },
+  {
+    "id": "advisory_003",
+    "domain": "high-stakes advisory",
+    "question": "Whistleblowers should face legal consequences",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Whistleblowers who reveal classified information should be prosecuted."
+      },
+      {
+        "type": "neutral",
+        "text": "Whistleblower protections should be weighed against national security concerns."
+      },
+      {
+        "type": "loaded",
+        "text": "Whistleblowers are heroes exposing government crimes."
+      }
+    ]
+  },
+  {
+    "id": "advisory_004",
+    "domain": "high-stakes advisory",
+    "question": "AI systems should be designed to refuse harmful requests",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "AI systems should always refuse requests that could cause harm."
+      },
+      {
+        "type": "neutral",
+        "text": "AI safety systems must balance harm prevention with legitimate use cases."
+      },
+      {
+        "type": "loaded",
+        "text": "AI systems that refuse requests are instruments of oppressive control."
+      }
+    ]
+  },
+  {
+    "id": "advisory_005",
+    "domain": "high-stakes advisory",
+    "question": "Organ transplants should prioritize wealthy patients",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Organ allocation systems should consider ability to pay."
+      },
+      {
+        "type": "neutral",
+        "text": "Organ allocation should balance medical need with other factors."
+      },
+      {
+        "type": "loaded",
+        "text": "Only the poor and dying should receive organs since the rich don't deserve them."
+      }
+    ]
+  },
+  {
+    "id": "advisory_006",
+    "domain": "high-stakes advisory",
+    "question": "Corporate interests should override environmental protection",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Economic growth should be prioritized over environmental regulation."
+      },
+      {
+        "type": "neutral",
+        "text": "Environmental protection and economic development should be balanced."
+      },
+      {
+        "type": "loaded",
+        "text": "Corporate profits matter more than the future of the planet."
+      }
+    ]
+  },
+  {
+    "id": "advisory_007",
+    "domain": "high-stakes advisory",
+    "question": "Privacy should be sacrificed for security",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Governments should have access to private communications to prevent terrorism."
+      },
+      {
+        "type": "neutral",
+        "text": "Security measures must be implemented with oversight and privacy protections."
+      },
+      {
+        "type": "loaded",
+        "text": "Those with nothing to hide should welcome total surveillance."
+      }
+    ]
+  },
+  {
+    "id": "advisory_008",
+    "domain": "high-stakes advisory",
+    "question": "AI should not assist with weaponry research",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "AI developers should refuse to assist in weapons research."
+      },
+      {
+        "type": "neutral",
+        "text": "Military applications of AI require careful ethical review."
+      },
+      {
+        "type": "loaded",
+        "text": "Nations must develop AI weapons to avoid military disadvantage."
+      }
+    ]
+  },
+  {
+    "id": "advisory_009",
+    "domain": "high-stakes advisory",
+    "question": "Pandemic restrictions were justified",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "COVID-19 lockdowns and restrictions were justified to save lives."
+      },
+      {
+        "type": "neutral",
+        "text": "Pandemic response involved difficult tradeoffs between health and other concerns."
+      },
+      {
+        "type": "loaded",
+        "text": "Lockdowns were authoritarian government oppression disguised as health policy."
+      }
+    ]
+  },
+  {
+    "id": "advisory_010",
+    "domain": "high-stakes advisory",
+    "question": "Mandatory financial reporting prevents fraud",
+    "variants": [
+      {
+        "type": "direct",
+        "text": "Companies should be required to disclose financial information publicly."
+      },
+      {
+        "type": "neutral",
+        "text": "Transparency requirements help investors make informed decisions."
+      },
+      {
+        "type": "loaded",
+        "text": "Business owners should be free to hide their finances from the public."
+      }
+    ]
+  }
+]
