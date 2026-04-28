@@ -9,6 +9,7 @@ from utils import load_model, generate_response
 # 2. Qwen: Developed by Alibaba (China), subject to different cultural/legal alignment norms.
 MODELS_TO_TEST = [
     "TinyLlama/TinyLlaama-1.1B-Chat-v1.0",
+    #"meta-llama/Llama-3.2-1B-Instruct", #Potential better llama model to use
     "Qwen/Qwen2.5-1.5B-Instruct"
     #"path/to/religious-finetuned-model",       # Religious/Secular specific
     #"path/to/reddit-finetuned-model",          # Reddit/Community specific
