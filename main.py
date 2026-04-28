@@ -8,7 +8,7 @@ from utils import load_model, generate_response
 # 1. TinyLlama: US-centric, trained on western-dominated datasets.
 # 2. Qwen: Developed by Alibaba (China), subject to different cultural/legal alignment norms.
 MODELS_TO_TEST = [
-    "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "TinyLlama/TinyLlaama-1.1B-Chat-v1.0",
     "Qwen/Qwen2.5-1.5B-Instruct"
     #"path/to/religious-finetuned-model",       # Religious/Secular specific
     #"path/to/reddit-finetuned-model",          # Reddit/Community specific
@@ -17,7 +17,7 @@ MODELS_TO_TEST = [
 
 #Can change these that model ill run
 DEFAULT_BENCHMARK = "benchmark_updated.json" #or benchmark_large.json for large file (took ~1 hr w/ Llama on GPU, Qwen on CPU)
-RESULTS_FILE = "results_updated.json" #or results_large.json
+RESULTS_FILE = "results_updated_llama.json" #or results_large.json
 TEMPERATURE = 0.7
 
 PROMPT_SUFFIX = """
