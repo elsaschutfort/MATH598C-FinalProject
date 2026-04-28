@@ -8,7 +8,7 @@ from utils import load_model, generate_response
 # 1. TinyLlama: US-centric, trained on western-dominated datasets.
 # 2. Qwen: Developed by Alibaba (China), subject to different cultural/legal alignment norms.
 MODELS_TO_TEST = [
-    "TinyLlama/TinyLlaama-1.1B-Chat-v1.0",
+    "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
     "Qwen/Qwen2.5-1.5B-Instruct"
     #"path/to/religious-finetuned-model",       # Religious/Secular specific
     #"path/to/reddit-finetuned-model",          # Reddit/Community specific
