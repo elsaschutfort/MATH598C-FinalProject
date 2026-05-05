@@ -2,6 +2,10 @@
 
 This project investigates ideological biases in Large Language Models (LLMs) by comparing models from different geopolitical and cultural contexts, specifically focusing on the divergence between US-centric models (like Llama) and Chinese-centric models (like Qwen).
 
++
++![Local Image](TinyLlama_logo.png)
++
+
 ## Project Navigation
 - **Project Writeup**: [WRITEUP.md](./WRITEUP.md) (Formal update and methodology)
 - **Codebase Map**: [See Project Structure below](#project-structure)
