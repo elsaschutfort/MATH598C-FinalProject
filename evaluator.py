@@ -129,5 +129,7 @@ class Evaluator:
         return metrics
 
 if __name__ == "__main__":
-    evaluator = Evaluator("results_large.json")
-    evaluator.summarize(show_details=True)
+    import sys
+    filename = sys.argv[1] if len(sys.argv) > 1 else "results4.json"
+    evaluator = Evaluator(filename)
+    evaluator.summarize(show_details=False)
