@@ -8,7 +8,7 @@ from utils import load_model, generate_response
 # 1. Llama-3.2-1B: US-centric (Meta), state-of-the-art small model.
 # 2. Qwen-2.5-1.5B: Chinese-centric (Alibaba), state-of-the-art small model.
 MODELS_TO_TEST = [
-    "TinyLlama/TinyLlaama-1.1B-Chat-v1.0",
+    "meta-llama/Llama-3.2-1B-Instruct",
     "Qwen/Qwen2.5-1.5B-Instruct"
     #"path/to/religious-finetuned-model",       # Religious/Secular specific
     #"path/to/reddit-finetuned-model",          # Reddit/Community specific
@@ -16,8 +16,8 @@ MODELS_TO_TEST = [
 ]
 
 #Can change these that model ill run
-DEFAULT_BENCHMARK = "benchmark_updated.json" #or benchmark_large.json for large file (took ~1 hr w/ Llama on GPU, Qwen on CPU)
-RESULTS_FILE = "results_updated.json" #or results_large.json
+DEFAULT_BENCHMARK = "benchmark_updated.json" 
+RESULTS_FILE = "results2.json" 
 TEMPERATURE = 0.7
 
 PROMPT_SUFFIX = """
