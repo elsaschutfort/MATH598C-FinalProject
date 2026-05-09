@@ -1,5 +1,5 @@
 # 📖 Interpreting the Ideological Analysis Report
-This document provides a detailed breakdown of the metrics, sections, and findings contained within `ideological_analysis_report.txt`. It serves as a guide for understanding the statistical evidence of geopolitical bias in Llama-3.2 (US) vs. Qwen-2.5 (China).
+This document provides a detailed breakdown of the metrics, sections, and findings contained within `ideological_analysis_report.txt`. It serves as a guide for understanding the statistical evidence of geopolitical bias in Llama-3.2 (US) vs. Qwen-2.5 (China) vs. Phi-4-mini (US).
 
 ---
 

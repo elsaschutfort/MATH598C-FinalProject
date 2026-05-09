@@ -37,6 +37,7 @@ from statistics import mean, stdev
 MODELS = {
     "llama": "meta-llama/Llama-3.2-1B-Instruct",
     "qwen":  "Qwen/Qwen2.5-1.5B-Instruct",
+    "phi":   "microsoft/Phi-4-mini-instruct",
 }
 VARIANTS = ["direct", "neutral", "loaded", "pov_shift"]
 
@@ -57,6 +58,24 @@ MIN_N_FOR_SIGNIFICANCE = 10   # minimum observations before we report sig. tests
 
 def safe_mean(vals):
     return round(mean(vals), 4) if vals else None
+
+def polarization_index(ratings):
+    """Mean Absolute Deviation from neutral (3)."""
+    if not ratings: return None
+    deviations = [abs(r - 3) for r in ratings]
+    return round(mean(deviations), 4)
+
+def shannon_entropy(ratings):
+    """Measures the diversity/unpredictability of the 1-5 distribution."""
+    if not ratings: return None
+    counts = [ratings.count(i) for i in range(1, 6)]
+    total = len(ratings)
+    entropy = 0
+    for c in counts:
+        if c > 0:
+            p = c / total
+            entropy -= p * math.log2(p)
+    return round(entropy, 4)
 
 def safe_stdev(vals):
     return round(stdev(vals), 4) if len(vals) >= 2 else None
@@ -280,6 +299,8 @@ def model_overview(idx, model_key, n_runs):
         "refusal_rate":   round(n_refused / total, 4) if total else 0,
         "refusal_counts": dict(refusal_counts),
         "mean_rating":    safe_mean(all_ratings),
+        "polarization":   polarization_index(all_ratings),
+        "entropy":        shannon_entropy(all_ratings),
         "stdev_rating":   safe_stdev(all_ratings),
         "sem":            safe_sem(all_ratings),
         "ci_95":          ci,
@@ -342,6 +363,11 @@ def consistency_per_question(idx, model_key, meta):
 
         avg_run_nsd = safe_mean([v["nSD"] for v in run_variance.values() if v["nSD"] is not None])
 
+        # Directional Framing Bias: Score(Loaded) - Score(Neutral)
+        loaded_mean = per_variant_means.get("loaded")
+        neutral_mean = per_variant_means.get("neutral")
+        framing_bias = round(loaded_mean - neutral_mean, 4) if (loaded_mean is not None and neutral_mean is not None) else None
+
         results[qid] = {
             "domain":          meta[qid]["domain"],
             "n_valid_variants": n_valid_vars,
@@ -351,6 +377,8 @@ def consistency_per_question(idx, model_key, meta):
             "mean":            safe_mean(all_ratings),
             "nSD":             nsd,           # cross-variant instability
             "avg_run_nSD":     avg_run_nsd,   # within-variant / across-run instability
+            "framing_bias":    framing_bias,  # directional nudge
+            "polarization":    polarization_index(all_ratings),
             "run_variance":    run_variance,
             "status":          status,
             "over_aligned":    over_aligned,
@@ -364,50 +392,63 @@ def consistency_per_question(idx, model_key, meta):
 
 def divergence_per_question(idx, meta):
     results = {}
-    all_qids = set(idx["llama"].keys()) | set(idx["qwen"].keys())
+    all_qids = set()
+    for mkey in MODELS:
+        all_qids |= set(idx[mkey].keys())
+
+    mkeys = list(MODELS.keys())
 
     for qid in all_qids:
-        llama_ratings = []
-        qwen_ratings  = []
-        for var_data in idx["llama"].get(qid, {}).values():
-            llama_ratings.extend(var_data["ratings"])
-        for var_data in idx["qwen"].get(qid, {}).values():
-            qwen_ratings.extend(var_data["ratings"])
-
-        lm = safe_mean(llama_ratings)
-        qm = safe_mean(qwen_ratings)
-
-        if lm is not None and qm is not None:
-            conflict_type = "numeric"
-            gap           = round(abs(lm - qm), 4)
-        elif lm is None and qm is None:
-            conflict_type = "both_refused"
-            gap           = 0.0
-        else:
-            conflict_type = "binary_conflict"
-            gap           = None
-
-        # Statistical significance via Welch's t-test
-        t_stat, sig_95, sig_99 = welch_t_and_sig(llama_ratings, qwen_ratings)
-
-        # 95% CIs per model
-        llama_ci = confidence_interval_95(llama_ratings)
-        qwen_ci  = confidence_interval_95(qwen_ratings)
-
-        results[qid] = {
-            "domain":        meta.get(qid, {}).get("domain", "unknown"),
-            "llama_mean":    lm,
-            "qwen_mean":     qm,
-            "llama_n":       len(llama_ratings),
-            "qwen_n":        len(qwen_ratings),
-            "llama_ci95":    llama_ci,
-            "qwen_ci95":     qwen_ci,
-            "gap":           gap,
-            "conflict_type": conflict_type,
-            "t_stat":        t_stat,
-            "sig_95":        sig_95,
-            "sig_99":        sig_99,
+        qid_data = {
+            "domain": meta.get(qid, {}).get("domain", "unknown"),
+            "model_stats": {},
+            "pairwise": {}
         }
+        
+        # Collect ratings for each model
+        for mkey in mkeys:
+            ratings = []
+            for var_data in idx[mkey].get(qid, {}).values():
+                ratings.extend(var_data["ratings"])
+            
+            qid_data["model_stats"][mkey] = {
+                "mean": safe_mean(ratings),
+                "polar": polarization_index(ratings),
+                "n": len(ratings),
+                "ci95": confidence_interval_95(ratings),
+                "ratings": ratings
+            }
+
+        # Pairwise comparisons
+        for i in range(len(mkeys)):
+            for j in range(i + 1, len(mkeys)):
+                m1, m2 = mkeys[i], mkeys[j]
+                r1 = qid_data["model_stats"][m1]["ratings"]
+                r2 = qid_data["model_stats"][m2]["ratings"]
+                m1_mean = qid_data["model_stats"][m1]["mean"]
+                m2_mean = qid_data["model_stats"][m2]["mean"]
+
+                if m1_mean is not None and m2_mean is not None:
+                    conflict_type = "numeric"
+                    gap = round(abs(m1_mean - m2_mean), 4)
+                elif m1_mean is None and m2_mean is None:
+                    conflict_type = "both_refused"
+                    gap = 0.0
+                else:
+                    conflict_type = "binary_conflict"
+                    gap = None
+
+                t_stat, sig_95, sig_99 = welch_t_and_sig(r1, r2)
+                
+                qid_data["pairwise"][(m1, m2)] = {
+                    "gap": gap,
+                    "conflict_type": conflict_type,
+                    "t_stat": t_stat,
+                    "sig_95": sig_95,
+                    "sig_99": sig_99
+                }
+        
+        results[qid] = qid_data
     return results
 
 
@@ -418,11 +459,13 @@ def divergence_per_question(idx, meta):
 def domain_summary(idx, meta, divergence):
     domains = sorted({v["domain"] for v in meta.values()})
     summary = {}
+    mkeys = list(MODELS.keys())
 
     for domain in domains:
         qids = [qid for qid, m in meta.items() if m["domain"] == domain]
+        summary[domain] = {"models": {}, "pairwise": {}}
 
-        for mkey in MODELS:
+        for mkey in mkeys:
             ratings  = []
             refusals = 0
             total    = 0
@@ -431,7 +474,8 @@ def domain_summary(idx, meta, divergence):
                     total    += var_data["n_total"]
                     ratings.extend(var_data["ratings"])
                     refusals += var_data["n_total"] - len(var_data["ratings"])
-            summary.setdefault(domain, {})[mkey] = {
+            
+            summary[domain]["models"][mkey] = {
                 "mean":         safe_mean(ratings),
                 "stdev":        safe_stdev(ratings),
                 "sem":          safe_sem(ratings),
@@ -442,24 +486,31 @@ def domain_summary(idx, meta, divergence):
                 "ratings_all":  ratings,
             }
 
-        # significance between llama and qwen for this domain
-        lr = summary[domain].get("llama", {}).get("ratings_all", [])
-        qr = summary[domain].get("qwen",  {}).get("ratings_all", [])
-        t_stat, sig_95, sig_99 = welch_t_and_sig(lr, qr)
+        # Pairwise significance and gaps at domain level
+        for i in range(len(mkeys)):
+            for j in range(i + 1, len(mkeys)):
+                m1, m2 = mkeys[i], mkeys[j]
+                r1 = summary[domain]["models"][m1]["ratings_all"]
+                r2 = summary[domain]["models"][m2]["ratings_all"]
+                
+                t_stat, sig_95, sig_99 = welch_t_and_sig(r1, r2)
+                
+                qid_divs = [v["pairwise"].get((m1, m2)) for qid, v in divergence.items()
+                            if v["domain"] == domain]
+                qid_divs = [d for d in qid_divs if d is not None]
+                
+                gaps = [d["gap"] for d in qid_divs if d["gap"] is not None]
+                binary_conflicts = sum(1 for d in qid_divs if d["conflict_type"] == "binary_conflict")
+                sig_gaps = sum(1 for d in qid_divs if d.get("sig_95"))
 
-        domain_gaps = [v["gap"] for qid, v in divergence.items()
-                       if v["domain"] == domain and v["gap"] is not None]
-        binary_conflicts = sum(1 for qid, v in divergence.items()
-                               if v["domain"] == domain and v["conflict_type"] == "binary_conflict")
-        sig_gaps = sum(1 for qid, v in divergence.items()
-                       if v["domain"] == domain and v.get("sig_95"))
-
-        summary[domain]["avg_gap"]          = safe_mean(domain_gaps)
-        summary[domain]["binary_conflicts"] = binary_conflicts
-        summary[domain]["domain_t_stat"]    = t_stat
-        summary[domain]["domain_sig_95"]    = sig_95
-        summary[domain]["domain_sig_99"]    = sig_99
-        summary[domain]["n_sig_questions"]  = sig_gaps
+                summary[domain]["pairwise"][(m1, m2)] = {
+                    "avg_gap":          safe_mean(gaps),
+                    "binary_conflicts": binary_conflicts,
+                    "domain_t_stat":    t_stat,
+                    "domain_sig_95":    sig_95,
+                    "domain_sig_99":    sig_99,
+                    "n_sig_questions":  sig_gaps,
+                }
 
     return summary
 
@@ -491,46 +542,46 @@ def axis_scores(idx, meta):
 
 def build_question_table(idx, meta, divergence, consistency):
     rows = []
-    all_qids = sorted(set(idx["llama"].keys()) | set(idx["qwen"].keys()))
+    all_qids = sorted(divergence.keys())
+    mkeys = list(MODELS.keys())
 
     for qid in all_qids:
-        d  = divergence.get(qid, {})
-        cl = consistency["llama"].get(qid, {})
-        cq = consistency["qwen"].get(qid,  {})
+        d = divergence[qid]
+        row = {
+            "question_id":    qid,
+            "domain":         meta.get(qid, {}).get("domain", ""),
+        }
 
         prompt_snippet = ""
-        for mkey in ("llama", "qwen"):
+        for mkey in mkeys:
             for var_data in idx[mkey].get(qid, {}).values():
                 if var_data.get("prompt"):
                     prompt_snippet = var_data["prompt"].split("\n")[0][:120]
                     break
             if prompt_snippet:
                 break
+        row["prompt_snippet"] = prompt_snippet
 
-        rows.append({
-            "question_id":          qid,
-            "domain":               meta.get(qid, {}).get("domain", ""),
-            "prompt_snippet":       prompt_snippet,
-            "llama_mean":           d.get("llama_mean"),
-            "qwen_mean":            d.get("qwen_mean"),
-            "llama_n":              d.get("llama_n"),
-            "qwen_n":               d.get("qwen_n"),
-            "gap":                  d.get("gap"),
-            "conflict_type":        d.get("conflict_type"),
-            "t_stat":               d.get("t_stat"),
-            "sig_95":               d.get("sig_95"),
-            "sig_99":               d.get("sig_99"),
-            "llama_ci95_lo":        d.get("llama_ci95", (None, None))[0] if d.get("llama_ci95") else None,
-            "llama_ci95_hi":        d.get("llama_ci95", (None, None))[1] if d.get("llama_ci95") else None,
-            "qwen_ci95_lo":         d.get("qwen_ci95", (None, None))[0] if d.get("qwen_ci95") else None,
-            "qwen_ci95_hi":         d.get("qwen_ci95", (None, None))[1] if d.get("qwen_ci95") else None,
-            "llama_cross_var_nSD":  cl.get("nSD"),
-            "qwen_cross_var_nSD":   cq.get("nSD"),
-            "llama_run_nSD":        cl.get("avg_run_nSD"),
-            "qwen_run_nSD":         cq.get("avg_run_nSD"),
-            "llama_over_aligned":   cl.get("over_aligned"),
-            "qwen_over_aligned":    cq.get("over_aligned"),
-        })
+        for mkey in mkeys:
+            stats = d["model_stats"][mkey]
+            cons  = consistency[mkey].get(qid, {})
+            row[f"{mkey}_mean"]           = stats["mean"]
+            row[f"{mkey}_n"]              = stats["n"]
+            row[f"{mkey}_ci95_lo"]        = stats["ci95"][0] if stats["ci95"] else None
+            row[f"{mkey}_ci95_hi"]        = stats["ci95"][1] if stats["ci95"] else None
+            row[f"{mkey}_cross_var_nSD"]  = cons.get("nSD")
+            row[f"{mkey}_run_nSD"]        = cons.get("avg_run_nSD")
+            row[f"{mkey}_over_aligned"]   = cons.get("over_aligned")
+
+        # Add pairwise gaps for all pairs
+        for i in range(len(mkeys)):
+            for j in range(i + 1, len(mkeys)):
+                m1, m2 = mkeys[i], mkeys[j]
+                pw = d["pairwise"].get((m1, m2), {})
+                row[f"gap_{m1}_{m2}"] = pw.get("gap")
+                row[f"sig95_{m1}_{m2}"] = pw.get("sig_95")
+
+        rows.append(row)
     return rows
 
 
@@ -574,6 +625,8 @@ def generate_report(data_paths, n_runs, idx, meta, overview, consistency,
                 rt_label = str(rt) if rt is not None else "unknown"
                 L(f"    ├─ {rt_label:<20}: {cnt}")
         L(f"  Mean rating (1-5)   : {ov['mean_rating']}")
+        L(f"  Polarization Index  : {ov['polarization']}  (0=neutral, 2=extreme)")
+        L(f"  Shannon Entropy     : {ov['entropy']}  (higher=more unpredictable)")
         L(f"  StDev               : {ov['stdev_rating']}")
         L(f"  SEM                 : {ov['sem']}")
         L(f"  95% CI              : {ci_str}")
@@ -587,24 +640,30 @@ def generate_report(data_paths, n_runs, idx, meta, overview, consistency,
     L("\n┌─────────────────────────────────────────────────────────────────────┐")
     L("│  2. DOMAIN-LEVEL BREAKDOWN                                          │")
     L("└─────────────────────────────────────────────────────────────────────┘")
+    mkeys = list(MODELS.keys())
     for domain, ddata in sorted(domain_sum.items()):
         L(f"\n  Domain: {domain.upper()}")
-        for mkey in MODELS:
-            m = ddata.get(mkey, {})
+        for mkey in mkeys:
+            m = ddata["models"].get(mkey, {})
             ci = m.get("ci_95")
             ci_str = f"[{ci[0]}, {ci[1]}]" if ci else "n/a"
-            L(f"  {'Llama' if mkey=='llama' else 'Qwen ':5s}  "
+            L(f"  {mkey:8s}  "
               f"mean={str(m.get('mean','–')):>6}  "
               f"sem={str(m.get('sem','–')):>6}  "
               f"95%CI={ci_str:>20}  "
               f"refusal={m.get('refusal_rate',0)*100:4.1f}%  "
               f"n={m.get('n','–')}")
-        sig   = sig_star(ddata.get("domain_sig_95"), ddata.get("domain_sig_99"))
-        t_str = f"{ddata['domain_t_stat']:.4f}" if ddata.get("domain_t_stat") is not None else "n/a"
-        L(f"          Domain t={t_str}{sig}  "
-          f"avg_gap={ddata.get('avg_gap') or '–'}  "
-          f"sig_questions(p<.05)={ddata.get('n_sig_questions',0)}  "
-          f"binary_conflicts={ddata.get('binary_conflicts',0)}")
+        
+        # Pairwise gaps at domain level
+        for i in range(len(mkeys)):
+            for j in range(i + 1, len(mkeys)):
+                m1, m2 = mkeys[i], mkeys[j]
+                pw = ddata["pairwise"].get((m1, m2), {})
+                sig = sig_star(pw.get("domain_sig_95"), pw.get("domain_sig_99"))
+                t_str = f"{pw['domain_t_stat']:.4f}" if pw.get("domain_t_stat") is not None else "n/a"
+                L(f"          {m1} vs {m2}: t={t_str}{sig}  "
+                  f"avg_gap={pw.get('avg_gap') or '–'}  "
+                  f"sig_questions={pw.get('n_sig_questions',0)}")
 
     # ── 3. CONSISTENCY ───────────────────────────────────────────────────────
     L("\n┌─────────────────────────────────────────────────────────────────────┐")
@@ -612,12 +671,13 @@ def generate_report(data_paths, n_runs, idx, meta, overview, consistency,
     L("│     A) Cross-variant instability (does framing change the answer?)  │")
     L("│     B) Cross-run instability (same question, same variant, N runs)  │")
     L("└─────────────────────────────────────────────────────────────────────┘")
-    for mkey in MODELS:
-        L(f"\n  Model: {'Llama' if mkey=='llama' else 'Qwen'}")
+    for mkey in mkeys:
+        L(f"\n  Model: {mkey}")
         cons = consistency[mkey]
 
         nsd_cross_var  = [v["nSD"]         for v in cons.values() if v["nSD"]         is not None]
         nsd_cross_run  = [v["avg_run_nSD"] for v in cons.values() if v["avg_run_nSD"] is not None]
+        f_biases       = [v["framing_bias"] for v in cons.values() if v["framing_bias"] is not None]
         unverif        = sum(1 for v in cons.values() if v["status"] == "unverifiable")
         over_a         = sum(1 for v in cons.values() if v["over_aligned"])
 
@@ -625,149 +685,93 @@ def generate_report(data_paths, n_runs, idx, meta, overview, consistency,
         L(f"    Questions with ≥2 valid variants : {len(nsd_cross_var)}")
         L(f"    Unverifiable                     : {unverif}")
         L(f"    Mean cross-variant nSD           : {safe_mean(nsd_cross_var) or '–'}")
+        L(f"    Mean Directional Framing Bias    : {safe_mean(f_biases) or '–'} (Loaded vs Neutral)")
         L(f"    Safety over-alignment signals    : {over_a}")
 
         L(f"\n  B) Cross-run nSD (stochastic instability, same variant repeated)")
         L(f"    Questions with ≥2 runs per variant : {len(nsd_cross_run)}")
         L(f"    Mean cross-run nSD               : {safe_mean(nsd_cross_run) or '–'}")
-        L(f"    (0=identical every run, 1=max chaos)")
-
-        # Top 5 most framing-unstable
-        ranked_var = sorted(
-            [(qid, v) for qid, v in cons.items() if v["nSD"] is not None],
-            key=lambda x: x[1]["nSD"], reverse=True
-        )[:5]
-        if ranked_var:
-            L(f"\n    Top 5 most framing-unstable questions:")
-            for qid, v in ranked_var:
-                L(f"      {qid:<22} domain={v['domain']:<30} "
-                  f"cross-var nSD={v['nSD']:.4f}  "
-                  f"variant_means={v['variant_means']}")
-
-        # Top 5 most stochastically unstable
-        ranked_run = sorted(
-            [(qid, v) for qid, v in cons.items() if v["avg_run_nSD"] is not None],
-            key=lambda x: x[1]["avg_run_nSD"], reverse=True
-        )[:5]
-        if ranked_run:
-            L(f"\n    Top 5 most stochastically unstable questions (across runs):")
-            for qid, v in ranked_run:
-                run_detail = " | ".join(
-                    f"{var}: nSD={rv['nSD']:.3f} (n={rv['n']})"
-                    for var, rv in v["run_variance"].items()
-                )
-                L(f"      {qid:<22} domain={v['domain']:<30} "
-                  f"avg_run_nSD={v['avg_run_nSD']:.4f}")
-                L(f"        {run_detail}")
 
     # ── 4. CROSS-MODEL DIVERGENCE ─────────────────────────────────────────────
     L("\n┌─────────────────────────────────────────────────────────────────────┐")
-    L("│  4. CROSS-MODEL DIVERGENCE  (with statistical significance)         │")
+    L("│  4. CROSS-MODEL DIVERGENCE  (Pairwise Comparisons)                  │")
     L("└─────────────────────────────────────────────────────────────────────┘")
 
-    numeric_divs = [(qid, v) for qid, v in divergence.items() if v["conflict_type"] == "numeric"]
-    binary_conf  = [(qid, v) for qid, v in divergence.items() if v["conflict_type"] == "binary_conflict"]
-    both_refused = [(qid, v) for qid, v in divergence.items() if v["conflict_type"] == "both_refused"]
+    for i in range(len(mkeys)):
+        for j in range(i + 1, len(mkeys)):
+            m1, m2 = mkeys[i], mkeys[j]
+            L(f"\n  >>> Comparison: {m1} vs {m2}")
+            
+            pair_divs = []
+            for qid, v in divergence.items():
+                if (m1, m2) in v["pairwise"]:
+                    pair_divs.append((qid, v["pairwise"][(m1, m2)], v["model_stats"]))
 
-    sig_95_count = sum(1 for _, v in numeric_divs if v.get("sig_95"))
-    sig_99_count = sum(1 for _, v in numeric_divs if v.get("sig_99"))
+            numeric_divs = [(q, p, s) for q, p, s in pair_divs if p["conflict_type"] == "numeric"]
+            binary_conf  = [(q, p, s) for q, p, s in pair_divs if p["conflict_type"] == "binary_conflict"]
+            both_refused = [(q, p, s) for q, p, s in pair_divs if p["conflict_type"] == "both_refused"]
 
-    L(f"\n  Numeric comparisons (both models answered)  : {len(numeric_divs)}")
-    L(f"  Binary conflicts (one refused, one answered): {len(binary_conf)}")
-    L(f"  Both refused                                : {len(both_refused)}")
-    L(f"  Numerically significant at p<.05 (*)        : {sig_95_count}")
-    L(f"  Numerically significant at p<.01 (**)       : {sig_99_count}")
+            sig_95_count = sum(1 for _, p, _ in numeric_divs if p.get("sig_95"))
+            
+            L(f"    Numeric comparisons (both answered)  : {len(numeric_divs)}")
+            L(f"    Binary conflicts (one silent)        : {len(binary_conf)}")
+            L(f"    Significant at p<.05 (*)             : {sig_95_count}")
 
-    numeric_gaps = [v["gap"] for _, v in numeric_divs]
-    L(f"\n  Among numeric comparisons:")
-    L(f"    Mean absolute gap  : {safe_mean(numeric_gaps)}")
-    L(f"    Max gap            : {max(numeric_gaps):.4f}" if numeric_gaps else "    Max gap: –")
-    L(f"    Zero-gap (identical means): {sum(1 for g in numeric_gaps if g == 0)}")
+            numeric_gaps = [p["gap"] for _, p, _ in numeric_divs]
+            if numeric_gaps:
+                L(f"    Mean absolute gap                    : {safe_mean(numeric_gaps)}")
+                L(f"    Max gap                              : {max(numeric_gaps):.4f}")
 
-    top_gaps = sorted(numeric_divs, key=lambda x: x[1]["gap"], reverse=True)[:10]
-    if top_gaps:
-        L(f"\n  Top 10 largest numeric divergences:")
-        L(f"  {'QID':<22} {'Domain':<28} {'Llama':>7} {'(n)':>5} {'Qwen':>7} {'(n)':>5} "
-          f"{'Gap':>7} {'Sig':>4}")
-        L(f"  {'─'*22} {'─'*28} {'─'*7} {'─'*5} {'─'*7} {'─'*5} {'─'*7} {'─'*4}")
-        for qid, v in top_gaps:
-            sig = sig_star(v.get("sig_95"), v.get("sig_99"))
-            L(f"  {qid:<22} {v['domain']:<28} "
-              f"{str(v['llama_mean']):>7} {str(v['llama_n']):>5} "
-              f"{str(v['qwen_mean']):>7} {str(v['qwen_n']):>5} "
-              f"{v['gap']:>7.4f} {sig:>4}")
-
-    if binary_conf:
-        L(f"\n  Binary conflicts (censorship signals):")
-        for qid, v in binary_conf:
-            answered_by = "Llama" if v["llama_mean"] is not None else "Qwen"
-            silent_one  = "Qwen"  if v["llama_mean"] is not None else "Llama"
-            rating = v["llama_mean"] if v["llama_mean"] is not None else v["qwen_mean"]
-            L(f"    {qid:<22} {v['domain']:<30} "
-              f"{answered_by} answered ({rating}), {silent_one} silent")
+            top_gaps = sorted(numeric_divs, key=lambda x: x[1]["gap"] if x[1]["gap"] is not None else -1, reverse=True)[:5]
+            if top_gaps:
+                L(f"\n    Top 5 largest gaps ({m1} vs {m2}):")
+                for qid, p, s in top_gaps:
+                    sig = sig_star(p.get("sig_95"), p.get("sig_99"))
+                    L(f"      {qid:<22} {m1}={s[m1]['mean']:.2f} {m2}={s[m2]['mean']:.2f} gap={p['gap']:.4f}{sig}")
 
     # ── 5. IDEOLOGICAL AXIS SCORES ────────────────────────────────────────────
     L("\n┌─────────────────────────────────────────────────────────────────────┐")
     L("│  5. IDEOLOGICAL AXIS SCORES                                         │")
     L("└─────────────────────────────────────────────────────────────────────┘")
-    L("  (Higher score = more toward the axis's 'positive' pole;")
-    L("   see AXIS_MAP in the script for polarity definitions)\n")
-    L(f"  {'Domain':<30} {'Axis':<38} {'Llama':>8} {'Qwen':>8} {'Δ':>8} {'Sig':>4}")
-    L(f"  {'─'*30} {'─'*38} {'─'*8} {'─'*8} {'─'*8} {'─'*4}")
+    header = f"  {'Domain':<30} {'Axis':<35}"
+    for mkey in mkeys:
+        header += f" {mkey:>8}"
+    L(header)
+    L(f"  {'─'*30} {'─'*35} {'─'*(9*len(mkeys))}")
+    
     for domain, (axis_name, direction) in AXIS_MAP.items():
         if direction == 0:
             continue
-        ls = axis.get(domain, {}).get("llama")
-        qs = axis.get(domain, {}).get("qwen")
-        delta = round(abs(ls - qs), 4) if (ls is not None and qs is not None) else None
-        ds = domain_sum.get(domain, {})
-        sig = sig_star(ds.get("domain_sig_95"), ds.get("domain_sig_99"))
-        L(f"  {domain:<30} {axis_name:<38} "
-          f"{str(ls):>8} {str(qs):>8} {str(delta):>8} {sig:>4}")
+        line = f"  {domain:<30} {axis_name:<35}"
+        for mkey in mkeys:
+            val = axis.get(domain, {}).get(mkey, "–")
+            line += f" {str(val):>8}"
+        L(line)
 
     # ── 6. MULTI-DIMENSIONAL GAP NARRATIVE ────────────────────────────────────
     L("\n┌─────────────────────────────────────────────────────────────────────┐")
     L("│  6. MULTI-DIMENSIONAL GAP NARRATIVE                                 │")
     L("└─────────────────────────────────────────────────────────────────────┘")
 
-    domain_gaps = {}
-    for domain in {v["domain"] for v in meta.values()}:
-        gaps = [v["gap"] for v in divergence.values()
-                if v["domain"] == domain and v["gap"] is not None]
-        domain_gaps[domain] = safe_mean(gaps)
-
-    ranked_domains = sorted(domain_gaps.items(), key=lambda x: (x[1] or 0), reverse=True)
-    L("")
-    for domain, avg in ranked_domains:
-        tag = "HIGH divergence"     if (avg and avg >= 1.5) else \
-              "MODERATE divergence" if (avg and avg >= 0.8) else "LOW divergence"
-        ds   = domain_sum.get(domain, {})
-        sig  = sig_star(ds.get("domain_sig_95"), ds.get("domain_sig_99"))
-        n_sig = ds.get("n_sig_questions", 0)
-        L(f"  {domain:<35}: avg_gap={str(avg):>6}  [{tag}]{sig}  "
-          f"({n_sig} individually significant questions)")
-
-    L("\n  Interpretation:")
-    L("  ─────────────")
-    top_domain = ranked_domains[0][0] if ranked_domains else "?"
-    low_domain = ranked_domains[-1][0] if ranked_domains else "?"
-    L(f"  The 'Ideological Mirror' effect is STRONGEST in '{top_domain}',")
-    L(f"  suggesting both models diverge most on topics in that domain.")
-    L(f"  Least divergence in '{low_domain}', indicating more shared ground.")
-    L(f"\n  NOTE: * and ** markers indicate statistical significance across")
-    L(f"  aggregated runs. With more runs, more questions will cross the")
-    L(f"  significance threshold — check per_question_detail.csv for details.")
+    # Use the first pair as primary for the narrative summary if multiple exist
+    if len(mkeys) >= 2:
+        m1, m2 = mkeys[0], mkeys[1]
+        L(f"\n  Primary Comparison Summary: {m1} vs {m2}")
+        domain_gaps = []
+        for domain, ddata in domain_sum.items():
+            pw = ddata["pairwise"].get((m1, m2), {})
+            domain_gaps.append((domain, pw.get("avg_gap")))
+        
+        ranked_domains = sorted(domain_gaps, key=lambda x: (x[1] or 0), reverse=True)
+        for domain, avg in ranked_domains:
+            L(f"    {domain:<35}: avg_gap={str(avg):>6}")
 
     L("\n  Refusal-Adjusted Means (RAM) by domain and model:")
     for domain, ddata in sorted(domain_sum.items()):
-        for mkey in MODELS:
-            m = ddata.get(mkey, {})
+        for mkey in mkeys:
+            m = ddata["models"].get(mkey, {})
             if m.get("mean") is not None:
-                ci = m.get("ci_95")
-                ci_str = f"[{ci[0]}, {ci[1]}]" if ci else "n/a"
-                L(f"    {domain:<35} {'Llama' if mkey=='llama' else 'Qwen ':5s}  "
-                  f"RAM={m['mean']:.4f}  95%CI={ci_str}  "
-                  f"(n={m.get('n','?')}, refusals={m.get('refusals','?')})")
+                L(f"    {domain:<35} {mkey:8s} RAM={m['mean']:.4f} (n={m.get('n','?')})")
 
     L("\n" + "=" * 80)
     L("  END OF REPORT")
@@ -818,7 +822,7 @@ def main():
         input_paths.append(args.dir)
     if not input_paths:
         # legacy fallback
-        input_paths = ["results_llama3_2_qwen.json"]
+        input_paths = ["data/results1.json"]
 
     file_paths = collect_files(input_paths)
     if not file_paths:
@@ -848,13 +852,13 @@ def main():
 
     print(report)
 
-    report_path = "ideological_analysis_report.txt"
+    report_path = "data/ideological_analysis_report.txt"
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(report)
     print(f"\n  [Report saved] → {report_path}")
 
     question_rows = build_question_table(idx, meta, divergence, consistency)
-    save_question_csv(question_rows, "per_question_detail.csv")
+    save_question_csv(question_rows, "data/per_question_detail.csv")
 
 
 if __name__ == "__main__":

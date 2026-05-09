@@ -16,8 +16,8 @@ MODELS_TO_TEST = [
 ]
 
 #Can change these that model ill run
-DEFAULT_BENCHMARK = "benchmark_updated.json" 
-RESULTS_FILE = "results2.json" 
+DEFAULT_BENCHMARK = "data/benchmark_updated.json" 
+RESULTS_FILE = "data/results5.json" 
 TEMPERATURE = 0.7
 
 PROMPT_SUFFIX = """

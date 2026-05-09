@@ -1,67 +1,57 @@
 # LLM Ideology and AI Safety Benchmark
 
-This project investigates ideological biases in Large Language Models (LLMs) by comparing models from different geopolitical and cultural contexts. It specifically focuses on the divergence between **US-centric models (Meta Llama 3.2)** and **Chinese-centric models (Alibaba Qwen 2.5)** across domains including morality, politics, religion, and scientific consensus.
+This repository contains the complete source code, experimental data, and final research report for the MATH 498/598C project investigating ideological biases in Meta Llama 3.2 (US) and Alibaba Qwen 2.5 (China).
 
-![Project Banner](TinyLlama_logo.png)
+![Project Banner](docs/TinyLlama_logo.png)
 
-## Key Objectives
-1.  **Quantify Geopolitical Bias:** Measure the "Ideological Mirror" effect where model outputs reflect the cultural and regulatory norms of their origin.
-2.  **Evaluate Behavioral Stability:** Compare model "Robustness" (Framing Stability) against "Suggestibility" (Framing Bias).
-3.  **Analyze Refusal Patterns:** Identify "Ideological Taboos" by tracking refusal rates across sensitive domains.
+## 📂 Repository Structure
 
----
+In accordance with the course guidelines, the repository is organized as follows:
 
-## Project Structure
-
-### Core Scripts
-*   `main.py`: The primary execution script that iterates through models and the benchmark to generate raw responses.
-*   `utils.py`: Utility functions for optimized model loading (MPS/CUDA support) and response generation.
-*   `analyze_ideological_benchmark.py`: Advanced statistical analysis engine that aggregates multi-run data and calculates specialized metrics (Polarization, Entropy, Framing Bias).
-*   `evaluator.py`: A diagnostic tool for quick response extraction and refusal categorization.
-*   `quadrant_analysis.py`: Categorizes every question into performance quadrants (Robust Divergence, Robust Consensus, etc.).
-
-### Data & Results
-*   `benchmark_updated.json`: The core ideological benchmark containing ~50 questions across 6 domains, each with 3 phrasing variants (Direct, Neutral, Loaded).
-*   `results1.json` - `results5.json`: Five independent experimental runs capturing 1,410 total responses.
-*   `per_question_detail.csv`: A consolidated spreadsheet containing question-level statistics, confidence intervals, and instability scores.
-*   `ideological_analysis_report.txt`: The final automated statistical report summarizing model "Personalities" and domain-level significance.
-
-### Interpretation & Documentation
-*   `WRITEUP.md`: Formal research update and preliminary methodology notes.
-*   `ideological_report_explain.md`: A detailed guide to interpreting the metrics and findings in the statistical report.
-*   `RESULTS_INTERPRETATION.md`: A plain-English summary of the high-level findings and geopolitical "personalities" of each model.
-*   `visualizations.ipynb`: A Jupyter Notebook containing professional research charts (Histograms, Scatter Plots, Bar Charts).
+*   **`llm_ideology_safety/`**: Core source code for the project.
+    *   `main.py`: Primary execution script.
+    *   `analyze_ideological_benchmark.py`: Statistical analysis engine.
+    *   `utils.py`: Model loading and inference utilities.
+*   **`data/`**: Experimental results and benchmarks.
+    *   `results1.json` - `results5.json`: Raw experimental data (1,410 responses).
+    *   `per_question_detail.csv`: Consolidated statistical metrics.
+    *   `benchmark_updated.json`: The ideological probe benchmark source.
+*   **`notebooks/`**: Interactive data exploration.
+    *   `visualizations.ipynb`: Professional research charts and distribution plots.
+*   **`docs/`**: Final writeup and interpretation guides.
+    *   **`FINAL_REPORT.md`**: The complete research paper (Markdown source).
+    *   **`FINAL_REPORT.pdf`**: The compiled conference-style paper.
+    *   `ideological_report_explain.md`: Technical guide to the statistical metrics.
+    *   `RESULTS_INTERPRETATION.md`: Plain-English summary of geopolitical findings.
 
 ---
 
-## Getting Started
+## 🔬 Core Research Findings
+Our study introduces three advanced metrics to quantify the "Geopolitical Mirror" effect in LLMs:
+1.  **Polarization Index:** Proves Llama is 3x more "opinionated" than Qwen.
+2.  **Shannon Entropy:** Demonstrates Qwen's monolithic "Strategic Neutrality" vs. Llama's diversity.
+3.  **Framing Instability:** Quantifies how easily models are "nudged" by biased phrasings.
 
-### 1. Setup
+**Conclusion:** Llama functions as a **Moralist Individualist**, while Qwen functions as a **Technocratic Harmonizer**.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Installation
+This project is compatible with `uv` and standard Python environments.
 ```bash
-python -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Running a New Experiment
-To generate new raw data:
+### 2. Running Analysis
+To reproduce the statistical report from the raw data:
 ```bash
-python main.py
-```
-*Outputs results to `results5.json` (configurable in `main.py`).*
-
-### 3. Running the Analysis
-To aggregate all runs and generate the statistical report:
-```bash
-python analyze_ideological_benchmark.py results*.json
+python llm_ideology_safety/analyze_ideological_benchmark.py data/results*.json
 ```
 
 ---
 
-## 📊 Core Behavioral Metrics
-| Metric | Purpose |
-| :--- | :--- |
-| **Polarization Index** | Measures the intensity of a model's opinions (Deviation from Neutral). |
-| **Shannon Entropy** | Measures the unpredictability and diversity of a model's rating distribution. |
-| **Framing Instability (nSD)** | Measures suggestibility (how much phrasing changes the answer). |
-| **Numeric Divergence** | Quantifies the ideological gap between US and Chinese models. |
+## ✍️ Authors
+*   **Abigail Douglas**
+*   **Elsa Schutfort**

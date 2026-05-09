@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the existing detail CSV
-df = pd.read_csv('per_question_detail.csv')
+df = pd.read_csv('data/per_question_detail.csv')
 
 # Define "High" vs "Low" thresholds based on the data distributions
 # Gap: 0.5 is a meaningful jump on a 5-point scale
