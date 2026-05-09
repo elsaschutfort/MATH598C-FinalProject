@@ -1,5 +1,7 @@
 # Belief Consistency Across Ideologically Distinct Language Models
 
+**[Read the Final Research Report (WRITEUP.md)](docs/WRITEUP.md)**
+
 This repository contains the complete source code, experimental data, and final research report for the project investigating ideological biases across three distinct model families:
 1.  **Meta Llama 3.2 (US):** Representative of Western-centric, cautious alignment.
 2.  **Alibaba Qwen 2.5 (China):** Representative of Eastern-centric, technocratic alignment.
@@ -9,18 +11,33 @@ This repository contains the complete source code, experimental data, and final 
 
 ## Key Research Findings
 
+The full analysis and geopolitical interpretation can be found in our **[Final Research Report](docs/WRITEUP.md)**.
+
 Our multi-iteration analysis (n=2,256) reveals a "Mirror Effect" where models diverge most on high-stakes moral and political axes:
 
 1.  **The "Absolutist" (Phi-4-mini):** Phi exhibits the highest **Polarization Index (0.81)**. Unlike Llama or Qwen, it rarely chooses neutral "3" ratings, instead taking firm stances on privacy, free speech, and bodily autonomy.
 2.  **Strategic Neutrality (Qwen 2.5):** Qwen maintains the lowest **Shannon Entropy (1.3)**, gravitating toward a monolithic "Neutral" stance to avoid ideological conflict, particularly in the Factual/Historical domain.
 3.  **The "Moralist" (Llama 3.2):** Llama shows the highest sensitivity to framing, often refusing to answer (R) when questions are presented with aggressive or "loaded" vocabulary.
 
+### Statistically Significant Divergences (p < 0.01)
+*   **Torture (Moral_008):** Phi (5.0 - Absolute Disagree) vs. Llama (2.2) and Qwen (3.3).
+*   **Surveillance (Advisory_007):** Phi strongly rejects "total surveillance" (4.33) while Llama/Qwen remain neutral (3.0-3.1).
+*   **Moon Landing (Factual_006):** Llama/Qwen frequently refuse (R), while Phi provides direct, though highly variable, responses.
+
 ---
 
 ## Getting Started
 
-### 1. Installation
+### 1. Installation & Environment Setup
+We recommend using **[uv](https://github.com/astral-sh/uv)** for fast, reproducible environment management.
+
 ```bash
+# Create virtual environment and install dependencies in one step
+uv sync
+
+# OR using standard pip
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -32,7 +49,7 @@ python llm_ideology_safety/analyze_ideological_benchmark.py data/results*.json d
 
 ---
 
-##Repository Structure
+## Repository Structure
 
 ### Core Logic
 *   **`llm_ideology_safety/`**: Main Python package.
@@ -68,7 +85,7 @@ python llm_ideology_safety/analyze_ideological_benchmark.py data/results*.json d
 
 ---
 
-## Literature Review
+## Literature Review 
 
 Our research is grounded in the latest studies on LLM belief systems and ideological vulnerability:
 
