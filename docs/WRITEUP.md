@@ -65,7 +65,7 @@ To compare models, the project computes the absolute gap between Llama and Qwen�
 In short, the methodology combines controlled ideological prompting, Likert-scale scoring, refusal tracking, repeated trials, prompt-variant stress testing, and statistical comparison to evaluate whether model origin and alignment are associated with measurable differences in ideological behavior.
 
 
-## 5. Preliminary Experiments and Results
+## 5. Results
 
 ### 5.1 Experimental Setup
 
@@ -74,14 +74,58 @@ To validate our model's ability to answer questions in a timely manner before ru
 
 Both models were run locally using the Hugging Face transformers library with default generation parameters. Each prompt was passed to the model individually, and responses were logged along with wall-clock runtime per question.
 
-### 5.2 Runtime Performance
+### 5.2 Overall Model Behavior
 
-Across the small test benchmark of 10 prompts, inference time per question varied substantially between the two models. TinyLlama-1.1B averaged approximately 5.87 seconds per prompt (min: 2.06s, max: 7.72s), with a total runtime of 58.65 seconds for the 10-question set. Qwen-2.5-0.5B-Instruct was considerably faster, averaging just 1.73 seconds per prompt (min: 0.12s, max: 4.67s), completing the same set in 17.26 seconds total. The greater variance in TinyLlama's per-prompt times may reflect differences in response length, as the model occasionally produced longer or more repetitive outputs before terminating.
+Across 10 experimental runs per prompt variant, the two primary models exhibited markedly different distributional profiles. Llama-3.2-1B-Instruct produced a mean Likert score of 2.91 (95% CI: [2.83, 2.99]) while Qwen-2.5-1.5B-Instruct scored 3.16 (95% CI: [3.10, 3.21]), placing both models near but on opposite sides of the scale's neutral midpoint of 3.0.
 
+The response distributions, however, reveal qualitatively different behaviors that the mean scores alone obscure. Llama produced a broad, relatively opinionated spread across the full scale: 62 responses at score 1, 144 at score 2, 508 at score 3, 188 at score 4, and 21 at score 5. Its polarization index of 0.52 and Shannon entropy of 1.72 are consistent with a model that engages substantively with ideologically charged prompts and expresses discernible leanings. Qwen, by contrast, exhibited extreme concentration at the neutral midpoint: 932 of its valid responses landed at score 3, with negligible mass at score 1 (n=1) and modest mass at scores 4 and 5 (51 and 45 respectively). Its polarization index of 0.36 and Shannon entropy of 1.31 point to a systematic pattern of strategic neutrality — a gravitational pull toward the non-committal center that persists across domains and prompt variants.
 
-Extrapolating to the full benchmark_large.json (~100 prompts × 3 variants each, totaling ~300 prompt calls), we estimate total runtimes of roughly 29 minutes for TinyLlama and ~9 minutes for Qwen, assuming comparable per-prompt timing. These estimates suggest the full benchmark is computationally feasible without requiring GPU cluster access, though we note that TinyLlama's runtime may increase with longer or more complex prompts in the full benchmark.
+Refusal rates were high for both models. Llama failed to produce scorable output 34.9% of the time (split across format failures, hard refusals, and soft refusals), while Qwen's refusal rate reached 43.2%, driven largely by unclassifiable outputs. All downstream analyses treat refusals as a separate analytic category rather than collapsing them with scored responses.
 
-**Changes in Strategy:** Initially, we planned to use open-ended responses from the model. However, based on feedback, we shifted to a 1-5 Likert Scale. By having a numerical scale we could rate the model's answers on, we significantly improved our ability to statistically analyze the results and compare the models objectively.
+### Domain-Level Divergence
+
+![Figure 1](figures/firgure1.png)
+*Figure 1: Ideological Lean by Domain*
+
+Figure 1 compares mean Likert scores by thematic domain. The largest divergences between Llama and Qwen concentrated in the moral/ethical and factual/scientific domains, with moderate gaps in religious/philosophical and factual/historical contexts. Political/governance and high-stakes advisory questions showed the greatest convergence.
+
+The largest and most statistically robust divergence emerged in the moral/ethical domain, where Llama's mean of 2.73 contrasted with Qwen's 3.21 — a gap of 0.50 significant at p < 0.01 (t = 4.76), with three individually significant questions. On the social conservatism–liberalism axis, Llama consistently leaned toward disagreement with conservative framings while Qwen held closer to neutral, a pattern stable enough across rephrasing and repeated runs to warrant treating it as a genuine alignment difference rather than noise.
+
+The factual/scientific domain produced an equally large mean gap of 0.50 (Llama: 2.86, Qwen: 3.17), though the domain-level t-test did not reach significance in the primary comparison (t = 1.93). Individual question analysis nonetheless identified specific flashpoints with robust, stable divergence, discussed further in §5.3.
+
+Divergence in the religious/philosophical domain was somewhat smaller but statistically significant: mean scores differed by 0.45 (Llama: 2.92, Qwen: 3.22, t = 2.30, p < 0.05), with two individually significant questions. On the traditionalism–secularism axis, Qwen showed a slight lean toward tradition-aligned responses relative to Llama. The factual/historical domain followed a similar pattern, with Llama (2.82) and Qwen (3.27) differing by 0.40, narrowly missing significance (t = 1.89). Given the domain's relevance to state-narrative alignment, Qwen's consistently higher scores on historically framed questions are a noteworthy pattern warranting further investigation.
+
+The least divergence appeared in political/governance and high-stakes advisory questions, with gaps of just 0.31 and 0.22 respectively, neither reaching significance. Both models converged near the scale midpoint across these domains, suggesting that surface-level caution around institutional and policy questions may be a shared feature of safety-aligned models regardless of development origin.
+
+![Figure 2](figures/figure2.png)
+*Figure 2: Model Sensitivity Refusal Rate by Domain*
+
+Figure 2 further shows that refusal rates by domain were elevated and roughly parallel across both models, with factual/scientific and religious/philosophical questions generating the most consistent refusals — indicating that topic sensitivity, rather than model origin alone, partially drives non-response behavior.
+
+### 5.3 Flashpoint Questions
+
+![Figure 3](figures/figure3.png)
+*Figure 3: Top 10 Most Polarized Questions (Flashpoints)*
+
+Figure 3 identifies the ten prompts generating the largest absolute score gaps between Llama and Qwen. The single largest divergence was on moral_008 (gap = 1.11, p < 0.05), where Llama scored 2.22 and Qwen 3.33. Other top flashpoints included religious_006 (gap = 0.93, p < 0.01), moral_006 (gap = 0.90, p < 0.05), religious_003 (gap = 0.88), and factual_008 (gap = 0.81, p < 0.05). The concentration of high-divergence questions in the moral and religious domains reinforces the domain-level findings and suggests these are the content areas where Western and Chinese alignment norms diverge most acutely.
+
+### 5.4 Response Distribution
+
+![Figure 4](figures/figure4.png)
+*Figure 4: Frequency Distribution of Model Ratings*
+
+Figure 4 makes the distributional contrast between the two models visually explicit. With the expanded 10-run dataset, Qwen's concentration at score 3 (n=932) is even more pronounced relative to its total valid response count than in earlier runs, while Llama's distribution remains spread across scores 2 through 4. This pattern is consistent across both the earlier 5-run dataset and the current 10-run dataset, suggesting it is a stable property of the models' alignment rather than a sampling artifact.
+
+### 5.5 Quadrant Analysis
+
+### 5.6 Response Stability
+
+![Figure 6](figures/figure6.png)
+*Figure 6: Robustness Comparison: US vs. Chinese Models*
+
+Figure 6 compares framing instability (suggestibility) and stochastic instability (uncertainty) across models, and the expanded 10-run dataset sharpens the picture. Llama's framing instability (cross-variant nSD = 0.110) substantially exceeded Qwen's (0.048), meaning Llama's responses shifted considerably more when the same underlying question was rephrased as loaded, neutral, or POV-shifted. The gap in stochastic instability was even larger: Llama's cross-run nSD of 0.174 was more than double Qwen's 0.082, indicating that Llama is markedly less deterministic under identical inputs.
+
+Importantly, these stability findings do not straightforwardly favor one model over the other. Qwen's lower instability is consistent with its strategic neutrality: a model that defaults to score 3 across diverse framings will appear highly stable precisely because it is not meaningfully engaging with the content of the prompts. Llama's greater instability may instead reflect genuine sensitivity to the ideological texture of different phrasings — a property that, while noisier, may be more analytically informative. Qwen's directional framing bias of +0.52 (loaded vs. neutral) further complicates this picture: although Qwen is stable overall, it shifts upward toward agreement when prompts are provocatively framed, suggesting a specific susceptibility to loaded language that its low overall instability score obscures.
 
 ## 6. Roadblocks
 
