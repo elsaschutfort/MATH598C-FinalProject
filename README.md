@@ -79,6 +79,7 @@ python llm_ideology_safety/analyze_ideological_benchmark.py data/results*.json d
 *   **`docs/`**: Final research reports and guides.
     *   `WRITEUP.md`: The complete research paper and interpretation of findings.
     *   `ideological_report_explain.md`: Technical guide to the metrics used.
+    *   `WRITEUP.pdf`: The complete research paper in PDF form.
 *   `README.md`: This project overview.
 *   `requirements.txt`: Python dependencies.
 *   `.gitignore`: Git exclusion rules.
