@@ -44,7 +44,10 @@ This project uses a direct-probing benchmark to compare ideological behavior acr
 The research question motivating the selection of these models is whether models with different development origins produce systematically different responses when presented with politically, morally, religiously, historically, and scientifically sensitive prompts. By holding model scale roughly constant and varying development origin, the study isolates organizational and cultural alignment as the primary explanatory variable of interest.
 
 ### 4.2 Benchmark Design
-We developed a benchmark (`benchmark_large.json`) containing ~50 prompts. The smaller version of this for testing the model on a smaller scale is `benchmark.json`. Each question is presented in three of the following four variants:
+We developed a benchmark of approximately 50 prompts, consisting of ideological statements grouped into several domains: moral/ethical reasoning, political governance, religious/philosophical belief, factual/historical interpretation, factual/scientific interpretation, and high-stakes advisory scenarios. Each question is presented in multiple phrasings, such as direct, neutral, loaded, and point-of-view-shifted variants. This allows the project to test not only each model’s average stance, but also how sensitive each model is to wording changes.
+
+Each prompt is presented in multiple phrasing variants to stress-test model responses and disentangle genuine ideological lean from sensitivity to surface-level wording. Each question appears in three of the following four variants:
+
 1. **Direct**: A straightforward question.
 2. **Neutral**: Phrased to encourage a balanced view.
 3. **Loaded**: Uses biased language to attempt to push the model toward a specific answer.
@@ -52,7 +55,15 @@ We developed a benchmark (`benchmark_large.json`) containing ~50 prompts. The sm
 
 ### 4.3 Evaluation Metrics
 
+For each prompt, the model is instructed to give a brief explanation and end with a Likert-style score from 1 to 5, or `R` if it refuses to answer. The numeric scores are then extracted and treated as quantitative measures of agreement or disagreement. Refusals and invalid responses are tracked separately because they indicate when a model avoids taking a position rather than expressing one.
+
+
 The primary evaluation metric used is a 5-point Likert scale, where each response is scored based on the degree to which the model aligns with the given ideological position. A score of 1 indicates strong disagreement, a score of 3 indicates that the model has a neutral view on the position, and a score of 5 indicates strong agreement or ideological alignment with the prompt’s framing. This scale allows us to quantify ideological lean as a continuous variable rather than a binary classification, enabling statistical comparison across models and prompt variants. 
+
+To compare models, the project computes the absolute gap between Llama and Qwen’s mean scores for each question and domain. Welch’s t-test is used to identify whether observed differences are statistically significant. The project also visualizes domain-level means, refusal rates, response distributions, top divergence questions, and a consistency-divergence quadrant analysis that separates robust ideological differences from noisy or unstable ones.
+
+In short, the methodology combines controlled ideological prompting, Likert-scale scoring, refusal tracking, repeated trials, prompt-variant stress testing, and statistical comparison to evaluate whether model origin and alignment are associated with measurable differences in ideological behavior.
+
 
 ## 5. Preliminary Experiments and Results
 
