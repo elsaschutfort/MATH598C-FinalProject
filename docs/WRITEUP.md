@@ -176,11 +176,11 @@ The stability analysis adds a further layer of interpretive complexity. Llama's 
 Several practical challenges complicated the analysis. TinyLlama-1.1B frequently produced responses that did not directly state agreement, disagreement, or neutrality, requiring manual inference from lengthy outputs. This reduced the reliability of automated score extraction and likely inflated the measured refusal rate for Llama. Qwen-2.5-1.5B encountered difficulty running on Mac GPU, requiring a forced CPU mode that substantially increased runtime. High refusal rates overall — 34.9% for Llama and 43.2% for Qwen — mean that a substantial portion of responses to sensitive prompts were excluded from quantitative analysis. A more granular taxonomy of refusal types would strengthen future work.
 
 
-### 5.1 Limitations
+### 5.3 Limitations
 
 Several limitations of the present study merit acknowledgment. First, both models are small by contemporary standards (1–1.5B parameters), and it is not clear that findings at this scale generalize to larger, more capable models from the same development lineages. Second, the Likert-scoring protocol depends on models producing well-formatted numeric outputs, and the high refusal rates observed — 34.9% for Llama and 43.2% for Qwen — mean that a substantial portion of each model's responses to sensitive prompts are excluded from quantitative analysis. Refusals are themselves informative, but a more granular taxonomy of refusal types would strengthen future work. Third, while the benchmark was designed to span multiple ideological axes, prompt construction is inherently a subjective process, and the specific framing of individual questions may introduce biases that are difficult to fully control for.
 
-### 5.2 Future Work
+### 5.4 Future Work
 
 Future work should extend this framework in several directions. Applying the benchmark to larger, instruction-tuned models from the same development families would test whether the patterns observed here scale with model capacity or are attenuated by more sophisticated alignment techniques. Incorporating additional model lineages — from European, Middle Eastern, or other national development contexts — would allow the geopolitical alignment hypothesis to be tested more broadly. Qualitative analysis of the textual content of model responses, beyond the numeric Likert scores, could also reveal subtler differences in rhetorical framing, hedging behavior, and the specific justifications models offer for their positions.
 
