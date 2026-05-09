@@ -1,4 +1,13 @@
+# Core Model Inference
 transformers
 torch
 accelerate
 bitsandbytes
+
+# Analysis & Data Processing
+pandas
+numpy
+
+# Visualizations (Notebooks)
+matplotlib
+seaborn
