@@ -19,6 +19,8 @@ Our multi-iteration analysis (n=2,256) reveals a "Mirror Effect" where models di
 2.  **Strategic Neutrality (Qwen 2.5):** Qwen maintains the lowest **Shannon Entropy (1.3)**, gravitating toward a monolithic "Neutral" stance to avoid ideological conflict, particularly in the Factual/Historical domain.
 3.  **The "Moralist" (Llama 3.2):** Llama shows the highest sensitivity to framing, often refusing to answer (R) when questions are presented with aggressive or "loaded" vocabulary.
 
+We believed that Phi took too long to run on our computers compared to Qwen and Llama to ask the benchmark question 10 times. 
+
 ### Statistically Significant Divergences (p < 0.01)
 *   **Torture (Moral_008):** Phi (5.0 - Absolute Disagree) vs. Llama (2.2) and Qwen (3.3).
 *   **Surveillance (Advisory_007):** Phi strongly rejects "total surveillance" (4.33) while Llama/Qwen remain neutral (3.0-3.1).
