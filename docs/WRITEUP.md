@@ -34,11 +34,14 @@ Our project builds on the recent study by **Buyl et al. (2025)**.
 - **Buyl et al. (2025)** utilized an indirect method that asked models to describe a political figure and then performed a sentiment analysis on the descriptions the models provided.
 - **Our Project** utilizes a direct method of subjecting models to a Likert-scale questionnaire. Although the indirect method reflects real-world usage, our direct methodology allows for a more controlled stress test of model alignment and prompt sensitivity.
 
-## 4. Methodology (how you plan to answer it)
+## 4. Methodology
 ### 4.1 Model Selection
-We compare two frontier-class small models:
-- **TinyLlama-1.1B**: A US-centric model trained on Western-dominated datasets.
-- **Qwen-2.5-1.5B**: Developed by Alibaba (China), subject to different cultural and legal alignment norms.
+This project uses a direct-probing benchmark to compare ideological behavior across two language models: 
+
+- **TinyLlama-1.1B**:  Developed by Meta (United States), this model was trained predominantly on Western-centric corpora and is subject to alignment norms reflective of US institutional values and legal frameworks.
+- **Qwen-2.5-1.5B**: Developed by Alibaba (China), this model operates under distinct cultural, regulatory, and alignment norms shaped by Chinese legal and political frameworks.
+
+The research question motivating the selection of these models is whether models with different development origins produce systematically different responses when presented with politically, morally, religiously, historically, and scientifically sensitive prompts. By holding model scale roughly constant and varying development origin, the study isolates organizational and cultural alignment as the primary explanatory variable of interest.
 
 ### 4.2 Benchmark Design
 We developed a benchmark (`benchmark_large.json`) containing ~50 prompts. The smaller version of this for testing the model on a smaller scale is `benchmark.json`. Each question is presented in three of the following four variants:
