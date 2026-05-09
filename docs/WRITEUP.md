@@ -197,7 +197,7 @@ Ultimately, this study contributes to a growing body of evidence that language m
 
 [1] Buyl, M., Rogiers, A., Noels, S., Bied, G., Dominguez-Catena, I., Heiter, E., Johary, I., Mara, A.-C., Romero, R., Lijffijt, J., & De Bie, T. (2025). Large language models reflect the ideology of their creators. *npj Artificial Intelligence*. https://doi.org/10.1038/s44387-025-00048-0
 
-[2] Myakala, P. K. (2025). BeliefShift: Benchmarking temporal belief consistency and opinion drift in LLM agents. *arXiv*. https://arxiv.org/abs/2603.23848
+[2] Myakala, P. K. (2026). BeliefShift: Benchmarking temporal belief consistency and opinion drift in LLM agents. *arXiv*. https://arxiv.org/abs/2603.23848
 
 [3] Chen, C., et al. (2024). How susceptible are large language models to ideological manipulation? *EMNLP 2024*. https://aclanthology.org/2024.emnlp-main.952/
 
